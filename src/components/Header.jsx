@@ -32,7 +32,9 @@ export default function Header() {
         <button
           id="button_login"
           className="ml-[20px] h-[26px] w-[65px] rounded-[5px] bg-[#7CE3E1] font-['Inter'] text-[14px] leading-none font-medium tracking-[0.01em]"
-        >Войти</button>
+        >
+          Войти
+        </button>
       </div>
     </header>
   );
