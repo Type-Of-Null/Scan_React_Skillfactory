@@ -5,9 +5,9 @@ export default function Promo() {
   return (
     <section id="promo" className="m-auto mt-6 flex h-[620px] w-[1320px]">
       <div className="flex flex-col">
-        <div className="relative z-1 mt-[25px] h-[288px] w-[743px] font-['Ferry'] text-[60px] leading-none font-black tracking-[0.01em] text-black">
+        <h1 className="relative z-1 mt-[25px] h-[288px] w-[743px] font-['Ferry'] text-[60px] leading-none font-black tracking-[0.01em] text-black">
           сервис по поиску публикаций о компании по его ИНН
-        </div>
+        </h1>
         <span className="mt-5 h-[48px] w-[534px] font-['Inter'] text-[20px] leading-none font-normal tracking-[0.01em]">
           Комплексный анализ публикаций, получение данных в формате PDF на
           электронную почту.
@@ -19,8 +19,6 @@ export default function Promo() {
           Запросить данные
         </button>
       </div>
-      {/*Сперва не понял для чего ЭТОТ квадрат на макете... :)
-       */}
       <div className="absolute top-[117px] left-[1289px] z-10 h-[73px] w-[69px] bg-white"></div>
       <div className="absolute top-[117px] left-[751px] h-[620px] w-[629px] overflow-hidden">
         <img
