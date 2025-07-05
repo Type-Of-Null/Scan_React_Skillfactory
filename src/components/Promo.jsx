@@ -1,20 +1,20 @@
 import React from "react";
-import PromoImg from "../assets/img/Promo.png";
+import PromoImg from "../assets/img/promo.png";
 
 export default function Promo() {
   return (
     <section id="promo" className="m-auto mt-6 flex h-[620px] w-[1320px]">
       <div className="flex flex-col">
-        <h1 className="relative z-1 mt-[25px] h-[288px] w-[743px] font-['Ferry'] text-[60px] leading-none font-black tracking-[0.01em] text-black">
+        <h1 className="default_text relative z-1 mt-[25px] h-[288px] w-[743px] font-['Ferry'] text-[60px] font-black text-black">
           сервис по поиску публикаций о компании по его ИНН
         </h1>
-        <span className="mt-5 h-[48px] w-[534px] font-['Inter'] text-[20px] leading-none font-normal tracking-[0.01em]">
+        <span className="default_text mt-5 h-[48px] w-[534px] font-['Inter'] text-[20px] font-normal">
           Комплексный анализ публикаций, получение данных в формате PDF на
           электронную почту.
         </span>
         <button
           id="button_request"
-          className="mt-[70px] h-[59px] w-[335px] rounded-[5px] bg-[#5970FF] font-['Inter'] text-[22px] leading-none font-medium tracking-[0.01em] text-white"
+          className="default_text mt-[70px] h-[59px] w-[335px] rounded-[5px] bg-[#5970FF] font-['Inter'] text-[22px] font-medium text-white"
         >
           Запросить данные
         </button>
