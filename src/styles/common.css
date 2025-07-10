@@ -4,6 +4,7 @@
 	@apply leading-none tracking-[0.01em];
 }
 
+
 @font-face {
 	font-family: 'ferry';
 	src        : url('../fonts/ferry_black.otf') format('opentype');

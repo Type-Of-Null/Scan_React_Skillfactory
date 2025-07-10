@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import SliderElement from "./SliderElement";
 import Flag from "../assets/img/flagSlider.png";
 import time from "../assets/img/sliderImgs/time.png";
@@ -51,7 +51,7 @@ export default function Slider() {
   };
 
   return (
-    <section id="slider_section" className="flex flex-col items-center">
+    <section id="slider_section" className="flex flex-col items-center max-sm:items-start">
       <div id="slider_container" className="flex items-center">
         {/* Кнопка "Влево" */}
         <button
@@ -63,7 +63,7 @@ export default function Slider() {
         </button>
 
         {/* Отображение трех элементов */}
-        <div className="flex h-[225px] w-[1260px] gap-7.5">
+        <div className="sm:flex sm:gap-7.5 sm:h-[225px]  sm:w-[1260px]">
           {[0, 1, 2].map((offset) => {
             const index = getIndex(currentIndex + offset);
             return (
@@ -71,6 +71,7 @@ export default function Slider() {
                 key={index}
                 text={sliderItems[index].text}
                 image={sliderItems[index].image}
+                className={offset === 0 ? "block" : "hidden sm:block"}
               />
             );
           })}

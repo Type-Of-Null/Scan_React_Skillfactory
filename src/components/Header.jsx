@@ -1,13 +1,22 @@
-import React from "react";
+import { memo } from "react";
 import Scan_logo from "../assets/img/scan_logo.png";
+import BurgerButton from "../assets/img/svg/BurgerButton.svg";
 
 const link_style = "text-black h-[17px] hover:underline hover:text-blue-500";
 
-export default function Header() {
+const Header = () => {
   return (
-    <header id="header_container" className="flex h-[93px] w-[1440px] bg-white">
-      <img src={Scan_logo} alt="" className="-mt-6 ml-15 h-[141px] w-[141px]" />
-      <div className="container-nav default_text my-[38px] ml-[401px] flex h-[17px] w-[236px] items-center justify-between font-['inter'] text-[14px] font-normal">
+    <header
+      id="header_container"
+      className="flex w-full flex-row justify-between bg-white sm:h-[93px] sm:w-[1440px] max-sm:w-[375px]"
+    >
+      <img
+        src={Scan_logo}
+        alt=""
+        className="-mt-[9px] ml-[14px] h-[111px] w-[111px] sm:-mt-6 sm:ml-15 sm:h-[141px] sm:w-[141px]"
+      />
+      {/* Навигационная панель (только десктоп) */}
+      <div className="container-nav default_text my-[38px] ml-[401px] hidden h-[17px] w-[236px] items-center justify-between font-['inter'] text-[14px] font-normal sm:flex">
         <a href="#!" className={link_style}>
           Главная
         </a>
@@ -18,9 +27,10 @@ export default function Header() {
           FAQ
         </a>
       </div>
+      {/* Блок авторизации (только десктоп) */}
       <div
-        id="container-login"
-        className="mt-[33px] mb-8.5 ml-[291px] flex h-[26px] w-[251px] items-center"
+        id="auth-container"
+        className="mt-[33px] mb-8.5 ml-[291px] hidden h-[26px] w-[251px] items-center sm:flex"
       >
         <div
           id="register_link"
@@ -36,6 +46,15 @@ export default function Header() {
           Войти
         </button>
       </div>
+      {/* Кнопка бургер меню (только мобилка) */}
+      <button
+        id="burgerButton"
+        className="mt-[34px] mr-[26px] h-[25px] w-[30px] sm:hidden"
+      >
+        <img src={BurgerButton} alt="..." />
+      </button>
     </header>
   );
-}
+};
+
+export default memo(Header);
