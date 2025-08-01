@@ -1,11 +1,11 @@
 import { useState } from "react";
 import SliderElement from "./SliderElement";
-import Flag from "../assets/img/flagSlider.png";
-import time from "../assets/img/sliderImgs/time.png";
-import find from "../assets/img/sliderImgs/find.png";
-import protect from "../assets/img/sliderImgs/protect.png";
-import cool from "../assets/img/sliderImgs/cool.png";
-import rating from "../assets/img/sliderImgs/rating.png";
+import Flag from "../../assets/img/flagSlider.png";
+import time from "../../assets/img/sliderImgs/time.png";
+import find from "../../assets/img/sliderImgs/find.png";
+import protect from "../../assets/img/sliderImgs/protect.png";
+import cool from "../../assets/img/sliderImgs/cool.png";
+import rating from "../../assets/img/sliderImgs/rating.png";
 
 export default function Slider() {
   // Массив данных для карусели, без использования сторонних библиотек
@@ -54,16 +54,12 @@ export default function Slider() {
     <section id="slider_section" className="flex flex-col items-center max-sm:items-start">
       <div id="slider_container" className="flex items-center">
         {/* Кнопка "Влево" */}
-        <button
-          id="left_flag"
-          onClick={handleLeftClick}
-          className="mr-1 h-[39px] w-[39px] rotate-180 opacity-20"
-        >
+        <button id="left_flag" onClick={handleLeftClick} className="mr-1 h-[39px] w-[39px] rotate-180 opacity-20">
           <img src={Flag} alt="flag" />
         </button>
 
         {/* Отображение трех элементов */}
-        <div className="sm:flex sm:gap-7.5 sm:h-[225px]  sm:w-[1260px]">
+        <div className="sm:flex sm:max-h-[225px] sm:max-w-[1260px] sm:gap-7.5">
           {[0, 1, 2].map((offset) => {
             const index = getIndex(currentIndex + offset);
             return (
@@ -78,11 +74,7 @@ export default function Slider() {
         </div>
 
         {/* Кнопка "Вправо" */}
-        <button
-          id="right_flag"
-          onClick={handleRightClick}
-          className="ml-1 h-[39px] w-[39px] opacity-20"
-        >
+        <button id="right_flag" onClick={handleRightClick} className="ml-1 h-[39px] w-[39px] opacity-20">
           <img src={Flag} alt="flag" />
         </button>
       </div>

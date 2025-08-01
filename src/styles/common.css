@@ -1,20 +1,24 @@
 @import "tailwindcss";
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 .default_text {
-	@apply leading-none tracking-[0.01em];
-}
-
-
-@font-face {
-	font-family: 'ferry';
-	src        : url('../fonts/ferry_black.otf') format('opentype');
-	font-weight: 900;
-	font-style : normal;
+  @apply leading-none tracking-[0.01em];
 }
 
 @font-face {
-	font-family: 'inter';
-	src        : url('../fonts/inter.ttf') format('truetype');
-	font-weight: 400;
-	font-style : normal;
+  font-family: "ferry";
+  src: url("../fonts/ferry_black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "inter";
+  src: url("../fonts/inter.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
 }
