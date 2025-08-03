@@ -16,7 +16,7 @@ export default function App() {
 			<BrowserRouter>
 			<Header />
 					<Routes>
-						{routesData.map((route, index) => (
+						{routes.map((route, index) => (
 							<Route key={index} path={route.path} element={route.element} />
 						))}
 					</Routes>
