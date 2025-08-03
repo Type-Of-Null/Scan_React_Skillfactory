@@ -22,21 +22,6 @@ export default function App() {
 					</Routes>
 			<Footer />
 			</BrowserRouter>
-    <div
-      id="App"
-      className="flex min-h-screen flex-col bg-white w-full max-sm:w-auto"
-    >
-      <BrowserRouter>
-        <Header />
-        <main className="flex-1 max-sm:overflow-auto">
-          <Routes>
-            {routes.map((route, index) => (
-              <Route key={index} path={route.path} element={route.element} />
-            ))}
-          </Routes>
-        </main>
-        <Footer />
-      </BrowserRouter>
     </div>
   );
 }
