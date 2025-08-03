@@ -12,6 +12,16 @@ const routes = [
 ];
 export default function App() {
   return (
+    <div className="sm:w-[1440px] min-h-screen max-sm:h-[3518px] bg-white flex flex-col">
+			<BrowserRouter>
+			<Header />
+					<Routes>
+						{routesData.map((route, index) => (
+							<Route key={index} path={route.path} element={route.element} />
+						))}
+					</Routes>
+			<Footer />
+			</BrowserRouter>
     <div
       id="App"
       className="flex min-h-screen flex-col bg-white w-full max-sm:w-auto"
