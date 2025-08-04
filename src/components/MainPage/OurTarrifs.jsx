@@ -4,8 +4,9 @@ import BusinessSvg from "../../assets/img/svg/Business.svg";
 import flagTarrifs from "../../assets/img/flagTarrifs.png";
 
 export default function OurTarrifs() {
-  const h3Style = "default_text mt-[30px] ml-[30px] h-[36px] w-[131px] font-['Inter'] text-[30px] font-medium";
-	// Описание тарифов
+  const h3Style =
+    "default_text mt-[30px] ml-[30px] h-[36px] w-[131px] font-['Inter'] text-[30px] font-medium";
+  // Описание тарифов
   const text_tarrifs = [
     {
       id: 1,
@@ -13,10 +14,14 @@ export default function OurTarrifs() {
       description: "Для небольшого исследования",
       image: BegginerSvg,
       imageStyle:
-        "absolute w-[92.24px] h-[83.15px] mt-[11px] ml-[307px] max-sm:w-[59px] max-sm:h-[53px] max-sm:ml-[271px]",
+        "absolute w-[92.24px] h-[83.15px] mt-[11px] ml-[307px] max-sm:w-[59px] max-sm:h-[53px] max-sm:ml-[241px]",
       headerStyle: "bg-[#FFB64F]",
       price: ["2500 ₽", "1800 ₽", "или 150 ₽/мес. при рассрочке на 24 мес."],
-      priceDescription: ["Безлимитная история запросов", "Безопасная сделка", "Поддержка 24/7"],
+      priceDescription: [
+        "Безлимитная история запросов",
+        "Безопасная сделка",
+        "Поддержка 24/7",
+      ],
     },
     {
       id: 2,
@@ -24,11 +29,15 @@ export default function OurTarrifs() {
       description: "Для HR и фрилансеров",
       image: ProSvg,
       imageStyle:
-        "absolute w-[92.24px] h-[83.15px] max-sm:w-[68px] max-sm:h-[75px] mt-[11px] ml-[307px] max-sm:ml-[248px]",
+        "absolute w-[92.24px] h-[83.15px] max-sm:w-[48px] max-sm:h-[75px] mt-[11px] ml-[307px] max-sm:ml-[228px]",
       headerStyle: "bg-[#7CE3E1]",
       h3Style: "text-[#000000]",
       price: ["3600 ₽", "2800 ₽", "или 300 ₽/мес. при рассрочке на 24 мес."],
-      priceDescription: ["Все пункты тарифа Beginner", "Экспорт истории", "Рекомендации по приоритетам"],
+      priceDescription: [
+        "Все пункты тарифа Beginner",
+        "Экспорт истории",
+        "Рекомендации по приоритетам",
+      ],
     },
     {
       id: 3,
@@ -36,15 +45,22 @@ export default function OurTarrifs() {
       description: "Для корпоративных клиентов",
       image: BusinessSvg,
       imageStyle:
-        "absolute w-[92.24px] h-[83.15px] max-sm:w-[73px] max-sm:h-[61px] mt-[11px] ml-[307px] max-sm:ml-[252px]",
+        "absolute w-[92.24px] h-[83.15px] max-sm:w-[73px] max-sm:h-[61px] mt-[11px] ml-[307px] max-sm:ml-[222px]",
       headerStyle: "bg-[#000000] text-[#FFFFFF]",
       price: ["4999 ₽", "3499 ₽"],
-      priceDescription: ["Все пункты тарифа Pro", "Безлимитное количество запросов", "Приоритетная поддержка"],
+      priceDescription: [
+        "Все пункты тарифа Pro",
+        "Безлимитное количество запросов",
+        "Приоритетная поддержка",
+      ],
     },
   ];
 
   return (
-    <section id="ourTarrifs" className="mt-[107.48px] ml-[5%] h-[664px] w-[95%] max-sm:ml-[14px] max-sm:w-[335px]">
+    <section
+      id="ourTarrifs"
+      className="mt-[107.48px] ml-[5%] flex min-h-screen w-[95%] flex-col max-sm:ml-[14px] max-sm:w-[315px]"
+    >
       <div
         id="text_tarrifs"
         className="default_text default_text w-[743px] font-['Ferry'] text-[45px] font-black max-sm:w-full max-sm:text-[25px]"
@@ -89,22 +105,28 @@ export default function OurTarrifs() {
               >
                 <div className="default_text h-[24px] w-[360px] font-['Inter'] text-[20px] font-medium max-md:w-full">
                   В тариф входит:
-                  <div className="mt-[10px]">
+                  <div className="mt-[10px] flex flex-col">
                     {item.priceDescription?.map((description, index) => (
                       <div
                         key={index}
-                        className="default_text mb-2.5 flex items-center font-['Inter'] text-[18px] font-normal max-sm:text-[16px]"
+                        className="default_text mb-2.5 flex items-center font-['Inter'] text-[18px] font-normal max-sm:text-[14px]"
                       >
-                        <img src={flagTarrifs} alt="Чекбокс" className="mr-[8px] h-[20px] w-[20px]" />
+                        <img
+                          src={flagTarrifs}
+                          alt="Чекбокс"
+                          className="mr-[8px] h-[20px] w-[20px]"
+                        />
                         {description}
                       </div>
                     ))}
-                    <button className="[20px] default_text mt-[45px] mb-[22px] h-[59px] w-full max-w-[335px] rounded-[5px] bg-[#5970FF] text-[20px] text-white max-sm:max-w-[286px]">
-                      Подробнее
-                    </button>
                   </div>
                 </div>
               </div>
+                <div className="flex flex-col items-center">
+                  <button className="default_text h-[59px] mt-10 w-56 rounded-[5px] bg-[#5970FF] text-[20px] text-white">
+                    Подробнее
+                  </button>
+                </div>
             </section>
           </div>
         ))}

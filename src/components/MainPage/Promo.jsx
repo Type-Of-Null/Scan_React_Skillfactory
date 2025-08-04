@@ -4,7 +4,7 @@ export default function Promo() {
   return (
     <section id="promo" className="flex flex-col sm:mt-6 sm:ml-[60px] sm:h-[620px] sm:max-w-[1320px] lg:flex-row">
       <div className="flex flex-col">
-        <h1 className="default_text relative z-1 ml-[14px] h-[136px] w-[361px] font-['Ferry'] text-[28px] font-black text-black sm:mt-[25px] sm:h-[288px] sm:w-[743px] sm:text-[60px]">
+        <h1 className="default_text relative z-1 ml-[14px] h-[136px] font-['Ferry'] text-[28px] font-black text-black sm:mt-[25px] sm:h-[288px] sm:w-[743px] sm:text-[60px]">
           сервис по поиску публикаций о компании по его ИНН
         </h1>
         <span className="default_text mt-[19px] ml-[14px] h-[66px] w-[327px] font-['Inter'] text-[20px] font-normal sm:mt-5 sm:h-[48px] sm:w-[534px]">

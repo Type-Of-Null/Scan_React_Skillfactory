@@ -12,11 +12,11 @@ const routes = [
 ];
 export default function App() {
   return (
-    <div className="sm:w-[1440px] min-h-screen max-sm:h-[3518px] bg-white flex flex-col">
+    <div className="min-w-[320px]"> 
 			<BrowserRouter>
 			<Header />
 					<Routes>
-						{routes.map((route, index) => (
+						{routes.map((route, index) => ( 
 							<Route key={index} path={route.path} element={route.element} />
 						))}
 					</Routes>
