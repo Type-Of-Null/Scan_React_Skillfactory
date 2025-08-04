@@ -15,7 +15,7 @@ export default function App() {
     <div className="flex min-h-screen min-w-[320px] flex-col">
       <BrowserRouter>
         <Header />
-        <div className="flex-grow">
+        <div className="flex-grow flex flex-col max-md:justify-center max-md:items-center">
           <Routes>
             {routes.map((route, index) => (
               <Route key={index} path={route.path} element={route.element} />

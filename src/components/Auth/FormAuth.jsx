@@ -1,5 +1,8 @@
 import { NavLink, Link } from "react-router-dom";
 import lock from "../../assets/img/svg/Lock.svg";
+import google from "../../assets/img/svg/google.svg";
+import facebook from "../../assets/img/svg/facebook.svg";
+import yandex from "../../assets/img/svg/yandex.svg";
 
 export function FormAuth() {
   const inputStyle =
@@ -9,11 +12,10 @@ export function FormAuth() {
 
   return (
     <form className="relative col-start-2 row-start-1 row-end-3 mt-[10%] mr-[3%] ml-[10%] flex flex-col items-center justify-between rounded-[10px] p-[25px] shadow-[0_0_20px_rgba(0,0,0,0.15)] md:max-w-3/4">
-
       {/* Lock изображение */}
       <img
         src={lock}
-        className="absolute top-[-25px] left-[-25px] h-[70px] w-[70px] z-10 max-lg::w-[50px] max-lg:h-[50px]"
+        className="max-lg::w-[50px] absolute top-[-25px] left-[-25px] z-10 h-[70px] w-[70px] max-lg:h-[50px]"
         alt="..."
       />
       {/* Ссылки Войти и Зарегистрироваться */}
@@ -61,9 +63,28 @@ export function FormAuth() {
       <button className="default-text h-15 w-full cursor-pointer rounded-[5px] border-[1px] border-[#C7C7C7] bg-[#5970FF] text-[22px] font-medium tracking-[0.01em] text-white">
         Войти
       </button>
-      <Link to="*" className="mt-[15px] text-[14px] tracking-[0.02em] text-[#5970FF] underline">
+      <Link
+        to="*"
+        className="mt-[15px] text-[14px] tracking-[0.02em] text-[#5970FF] underline"
+      >
         Восстановить пароль
       </Link>
+
+      {/* Ссылки Войти через соцсети */}
+      <span className="mt-4 w-full text-left text-[16px] tracking-[0.02em] text-[#949494]">
+        Войти через
+      </span>
+      <div className="flex gap-[5%] mt-3 flex-row justify-items-start w-full">
+        <Link to="https://google.com" target="_blank">
+          <img src={google} alt="" />
+        </Link>
+        <Link to="https://facebook.com" target="_blank">
+          <img src={facebook} alt="" />
+        </Link>
+        <Link to="https://yandex.ru" target="_blank">
+          <img src={yandex} alt="" />
+        </Link>
+      </div>
     </form>
   );
 }

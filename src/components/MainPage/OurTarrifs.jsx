@@ -68,7 +68,7 @@ export default function OurTarrifs() {
       >
         наши тарифы
       </div>
-      <div id="container_tarrifs" className="flex gap-[10%] max-sm:flex-col">
+      <div id="container_tarrifs" className="flex gap-[5%] max-sm:flex-col">
         {text_tarrifs.map((item) => (
           <div
             key={item.id}

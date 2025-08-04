@@ -11,7 +11,7 @@ const Header = () => {
       id="header_container"
       className="flex w-full flex-row justify-between bg-white max-sm:w-auto sm:h-[93px]"
     >
-      <Link>
+      <Link to="/">
         <img
           src={Scan_logo}
           alt=""
@@ -23,10 +23,10 @@ const Header = () => {
         <Link to="/" className={link_style}>
           Главная
         </Link>
-        <Link href="#!" className={link_style}>
+        <Link to="*" className={link_style}>
           Тарифы
         </Link>
-        <Link href="#!" className={link_style}>
+        <Link to="*" className={link_style}>
           FAQ
         </Link>
       </nav>

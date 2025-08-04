@@ -2,22 +2,34 @@ import PromoImg from "../../assets/img/promo.png";
 
 export default function Promo() {
   return (
-    <section id="promo" className="flex flex-col sm:mt-6 sm:ml-[60px] sm:h-[620px] sm:max-w-[1320px] lg:flex-row">
-      <div className="flex flex-col">
-        <h1 className="default_text relative z-1 ml-[14px] h-[136px] font-['Ferry'] text-[28px] font-black text-black sm:mt-[25px] sm:h-[288px] sm:w-[743px] sm:text-[60px]">
-          сервис по поиску публикаций о компании по его ИНН
-        </h1>
-        <span className="default_text mt-[19px] ml-[14px] h-[66px] w-[327px] font-['Inter'] text-[20px] font-normal sm:mt-5 sm:h-[48px] sm:w-[534px]">
-          Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.
-        </span>
-        <button
-          id="button_request"
-          className="default_text mt-[32px] ml-[14px] h-[59px] w-[335px] rounded-[5px] bg-[#5970FF] font-['Inter'] font-medium text-white sm:mt-[70px] sm:h-[59px] sm:w-[335px] sm:text-[22px]"
-        >
-          Запросить данные
-        </button>
-        <div className="mt-[19.3px] mr-[13.82px] ml-[14px] h-[342.21px] w-[347.18px] sm:absolute sm:top-[117px] sm:left-[751px] sm:mt-0 sm:h-[620px] sm:w-[629px] sm:overflow-hidden">
-          <img src={PromoImg} loading="lazy" alt="..." />
+    <section id="promo" className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12">
+        {/* Текстовый блок с кнопкой */}
+        <div className="flex flex-col items-center lg:items-start lg:w-1/2">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black font-['Ferry'] text-center lg:text-left mb-6">
+            сервис по поиску публикаций о компании по его ИНН
+          </h1>
+          
+          <p className="text-lg sm:text-xl font-['Inter'] text-center lg:text-left mb-8 max-w-lg">
+            Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.
+          </p>
+          
+          <button
+            id="button_request"
+            className="bg-[#5970FF] text-white font-['Inter'] font-medium rounded-lg px-8 py-4 text-lg hover:bg-[#4758d4] transition-colors w-full sm:w-auto"
+          >
+            Запросить данные
+          </button>
+        </div>
+
+        {/* Изображение */}
+        <div className="mt-8 lg:mt-0 lg:w-1/2">
+          <img 
+            src={PromoImg} 
+            loading="lazy" 
+            alt="Промо изображение"
+            className="w-full h-auto max-w-xl mx-auto"
+          />
         </div>
       </div>
     </section>
