@@ -2,6 +2,7 @@ import BegginerSvg from "../../assets/img/svg/Begginer.svg";
 import ProSvg from "../../assets/img/svg/Pro.svg";
 import BusinessSvg from "../../assets/img/svg/Business.svg";
 import flagTarrifs from "../../assets/img/flagTarrifs.png";
+import { Link } from "react-router-dom";
 
 export default function OurTarrifs() {
   const h3Style =
@@ -103,6 +104,7 @@ export default function OurTarrifs() {
                 id="tarrifs_description"
                 className="mt-[59px] ml-[30px] h-[110px] w-[341px] max-md:w-full max-sm:ml-[20px]"
               >
+                {/* Описание тарифа */}
                 <div className="default_text h-[24px] w-[360px] font-['Inter'] text-[20px] font-medium max-md:w-full">
                   В тариф входит:
                   <div className="mt-[10px] flex flex-col">
@@ -122,11 +124,15 @@ export default function OurTarrifs() {
                   </div>
                 </div>
               </div>
+
+              {/* Кнопка "Подробнее"*/}
+              <Link to="*">
                 <div className="flex flex-col items-center">
-                  <button className="default_text h-[59px] mt-10 w-56 rounded-[5px] bg-[#5970FF] text-[20px] text-white">
+                  <button className="default_text mt-10 h-[59px] w-56 rounded-[5px] bg-[#5970FF] text-[20px] text-white cursor-pointer">
                     Подробнее
                   </button>
                 </div>
+              </Link>
             </section>
           </div>
         ))}

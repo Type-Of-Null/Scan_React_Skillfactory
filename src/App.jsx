@@ -8,20 +8,22 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 const routes = [
   { path: "/", element: <Main /> },
   { path: "/auth", element: <Auth /> },
-	{ path: "*", element: <Error />},
+  { path: "*", element: <Error /> },
 ];
 export default function App() {
   return (
-    <div className="min-w-[320px]"> 
-			<BrowserRouter>
-			<Header />
-					<Routes>
-						{routes.map((route, index) => ( 
-							<Route key={index} path={route.path} element={route.element} />
-						))}
-					</Routes>
-			<Footer />
-			</BrowserRouter>
+    <div className="flex min-h-screen min-w-[320px] flex-col">
+      <BrowserRouter>
+        <Header />
+        <div className="flex-grow">
+          <Routes>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} element={route.element} />
+            ))}
+          </Routes>
+        </div>
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }

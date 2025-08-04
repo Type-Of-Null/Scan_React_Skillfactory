@@ -1,7 +1,7 @@
 import Scan_logo_footer from "../assets/img/scan_logo_footer.png";
 export default function Footer() {
   return (
-    <footer className="mt-[118px] flex h-[137px] w-full justify-between bg-[#029491] max-sm:mt-auto max-sm:w-auto">
+    <footer className="flex h-[137px] w-full justify-between bg-[#029491] max-sm:mt-auto max-sm:w-auto">
       <img
         src={Scan_logo_footer}
         alt=""

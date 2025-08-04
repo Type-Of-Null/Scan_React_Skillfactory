@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function ErrorPage() {
   return (
-    <section className="flex min-h-screen flex-col items-center justify-center bg-white p-4">
+    <section className="flex min-h-[calc(100vh-137px-93px)] flex-grow flex-col items-center justify-center">
       {/* Заголовок ошибки */}
       <h1 className="mb-6 text-center font-['Ferry'] text-[clamp(2rem,5vw,4rem)] font-black">
         404 - Страница не найдена
