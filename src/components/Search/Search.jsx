@@ -6,6 +6,7 @@ import { SearchForm } from "./SearchForm";
 export default function Search() {
   return (
     <section className="flex flex-row p-4 md:p-8 max-lg:flex-col gap-[2%]">
+
       {/* Блок с текстом и формой*/}
       <div className="flex flex-col relative">
         {/* Текст описания поиска */}

@@ -11,7 +11,7 @@ export default function FormAuth() {
     "relative mb-[15px] flex w-full flex-col text-[16px] leading-[19px] tracking-[0.02em] text-[#949494]";
 
   return (
-    <form className="relative col-start-2 row-start-1 row-end-3 mt-[10%] mr-[3%] ml-[10%] flex flex-col items-center justify-between rounded-[10px] p-[25px] shadow-[0_0_20px_rgba(0,0,0,0.15)] md:max-w-3/4 mb-3">
+    <form className="relative col-start-2 row-start-1 row-end-3 mt-[10%] mr-[3%] mb-3 ml-[10%] flex flex-col items-center justify-between rounded-[10px] p-[25px] shadow-[0_0_20px_rgba(0,0,0,0.15)] md:max-w-3/4">
       {/* Lock изображение */}
       <img
         src={lock}
@@ -56,16 +56,15 @@ export default function FormAuth() {
       </label>
       <label className={labelStyle}>
         Пароль:
-        <input className={inputStyle} type="text" />
+        <input className={inputStyle} type="password" />
       </label>
 
       {/* Кнопка входа  */}
-      <Link
-        to="/search"
-        className="default-text flex h-15 w-full cursor-pointer items-center justify-center rounded-[5px] border-[1px] border-[#C7C7C7] bg-[#5970FF] text-[22px] font-medium tracking-[0.01em] text-white"
-      >
+
+      <button type="submit" className="default-text flex h-15 w-full cursor-pointer items-center justify-center rounded-[5px] border-[1px] border-[#C7C7C7] bg-[#5970FF] text-[22px] font-medium tracking-[0.01em] text-white">
         Войти
-      </Link>
+      </button>
+
       <Link
         to="*"
         className="mt-[15px] text-[14px] tracking-[0.02em] text-[#5970FF] underline"

@@ -3,14 +3,16 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Auth from "./components/Auth/Auth";
 import Error from "./components/ErrorPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Search from "./components/Search/Search";
+import Result from "./components/ResultSearch/Result";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const routes = [
   { path: "/", element: <Main /> },
   { path: "/auth", element: <Auth /> },
   { path: "*", element: <Error /> },
-	{path: "/search", element: <Search/>}
+	{path: "/search", element: <Search/>},
+	{path: "/result", element: <Result/>},
 ];
 
 export default function App() {
