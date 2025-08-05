@@ -2,10 +2,22 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export const SearchForm = () => {
+	// Стили для элементов формы
   const searchInputStyle =
     "text-[14px] rounded-[5px] border border-[#c7c7c7] bg-white shadow-[0_0_20px_rgba(0,0,0,0.05)] p-[13px] tracking-[0.03em] w-[60%]";
   const labelStyle = "mb-5 flex w-[91%] flex-col text-lg";
 	const searchDateStyle = " w-full rounded-[5px] border border-[#c7c7c7] p-[13px]"
+
+	// Массив значений изменения состояния чекбоксов
+	const checkboxes = [
+    { id: "fullness", label: "Признак максимальной полноты" },
+    { id: "business", label: "Упоминания в бизнес-контексте" },
+    { id: "mainRole", label: "Главная роль в публикации" },
+    { id: "onlyRisk", label: "Публикации только с риск-факторами" },
+    { id: "techNews", label: "Включать технические новости рынков" },
+    { id: "includeAnonCalendar", label: "Включать анонсы и календари" },
+    { id: "includeNews", label: "Включать сводки новостей" },
+  ];
 
   return (
     // Форма поиска
@@ -82,76 +94,18 @@ export const SearchForm = () => {
       {/* Чекбоксы */}
       <div className="flex flex-col justify-between">
         <div className="max-md:hidden">
-          <div className="mb-4 flex items-center">
-            <input
-              id="fullness"
-              type="checkbox"
-              className="cursor-pointer opacity-[40%]"
-            />
-            <label htmlFor="fullness" className="ml-2 text-gray-700">
-              Признак максимальной полноты
-            </label>
-          </div>
-          <div className="mb-4 flex items-center">
-            <input
-              id="business"
-              type="checkbox"
-              className="cursor-pointer opacity-[40%]"
-            />
-            <label htmlFor="business" className="ml-2 text-gray-700">
-              Упоминания в бизнес-контексте
-            </label>
-          </div>
-          <div className="mb-4 flex items-center">
-            <input
-              id="mainRole"
-              type="checkbox"
-              className="cursor-pointer opacity-[40%]"
-            />
-            <label htmlFor="mainRole" className="ml-2 text-gray-700">
-              Главная роль в публикации
-            </label>
-          </div>
-          <div className="mb-4 flex items-center">
-            <input
-              id="onlyRisk"
-              type="checkbox"
-              className="cursor-pointer opacity-[40%]"
-            />
-            <label htmlFor="onlyRisk" className="ml-2 text-gray-700">
-              Публикации только с риск-факторами
-            </label>
-          </div>
-          <div className="mb-4 flex items-center">
-            <input
-              id="techNews"
-              type="checkbox"
-              className="cursor-pointer opacity-[40%]"
-            />
-            <label htmlFor="techNews" className="ml-2 text-gray-700">
-              Включать технические новости рынков
-            </label>
-          </div>
-          <div className="mb-4 flex items-center">
-            <input
-              id="includeAnonCalendar"
-              type="checkbox"
-              className="cursor-pointer opacity-[40%]"
-            />
-            <label htmlFor="includeAnonCalendar" className="ml-2 text-gray-700">
-              Включать анонсы и календари
-            </label>
-          </div>
-          <div className="mb-4 flex items-center">
-            <input
-              id="includeNews"
-              type="checkbox"
-              className="cursor-pointer opacity-[40%]"
-            />
-            <label htmlFor="includeNews" className="ml-2 text-gray-700">
-              Включать сводки новостей
-            </label>
-          </div>
+          {checkboxes.map(({ id, label }) => (
+            <div key={id} className="mb-4 flex items-center">
+              <input
+                id={id}
+                type="checkbox"
+                className="cursor-pointer opacity-[40%]"
+              />
+              <label htmlFor={id} className="ml-2 text-gray-700">
+                {label}
+              </label>
+            </div>
+          ))}
         </div>
 
         {/* Кнопка */}
