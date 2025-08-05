@@ -11,15 +11,15 @@ export default function FormAuth() {
     "relative mb-[15px] flex w-full flex-col text-[16px] leading-[19px] tracking-[0.02em] text-[#949494]";
 
   return (
-    <form className="relative col-start-2 row-start-1 row-end-3 mt-[10%] mr-[3%] ml-[10%] flex flex-col items-center justify-between rounded-[10px] p-[25px] shadow-[0_0_20px_rgba(0,0,0,0.15)] md:max-w-3/4">
+    <form className="relative col-start-2 row-start-1 row-end-3 mt-[10%] mr-[3%] ml-[10%] flex flex-col items-center justify-between rounded-[10px] p-[25px] shadow-[0_0_20px_rgba(0,0,0,0.15)] md:max-w-3/4 mb-3">
       {/* Lock изображение */}
       <img
         src={lock}
         className="max-lg::w-[50px] absolute top-[-25px] left-[-25px] z-10 h-[70px] w-[70px] max-lg:h-[50px]"
         alt="..."
       />
-      {/* Ссылки Войти и Зарегистрироваться */}
 
+      {/* Ссылки Войти и Зарегистрироваться */}
       <div className="flex w-full justify-center gap-x-10 max-sm:gap-x-2">
         <NavLink
           to="/auth"
@@ -60,7 +60,10 @@ export default function FormAuth() {
       </label>
 
       {/* Кнопка входа  */}
-      <Link to="/search" className="default-text h-15 w-full cursor-pointer rounded-[5px] border-[1px] border-[#C7C7C7] bg-[#5970FF] text-[22px] font-medium tracking-[0.01em] text-white">
+      <Link
+        to="/search"
+        className="default-text flex h-15 w-full cursor-pointer items-center justify-center rounded-[5px] border-[1px] border-[#C7C7C7] bg-[#5970FF] text-[22px] font-medium tracking-[0.01em] text-white"
+      >
         Войти
       </Link>
       <Link
@@ -74,7 +77,7 @@ export default function FormAuth() {
       <span className="mt-4 w-full text-left text-[16px] tracking-[0.02em] text-[#949494]">
         Войти через
       </span>
-      <div className="flex gap-[5%] mt-3 flex-row justify-items-start w-full">
+      <div className="mt-3 flex w-full flex-row justify-items-start gap-[5%]">
         <Link to="https://google.com" target="_blank">
           <img src={google} alt="" />
         </Link>

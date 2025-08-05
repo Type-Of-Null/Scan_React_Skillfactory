@@ -30,19 +30,19 @@ export default function Search() {
 
       {/* Изображения */}
       <div className="flex flex-col justify-between items-center">
-        <div className="flex flex-row justify-between gap-[10%]">
+        <div className="flex flex-row justify-between max-lg:hidden gap-20 xl:gap-40 2xl:gap-60">
 				<img
             src={Document}
             alt="folders"
-            className="h-[50%] w-[50%] object-contain max-lg:hidden"
+            className="h-[70%] w-[70%]"
           />
           <img
             src={Folders}
             alt="folders"
-            className="h-[40%] w-[40%] object-contain max-lg:hidden"
+            className="h-[40%] w-[40%]"
           />
         </div>
-        <img src={ManRocket} alt="rocketman" className="max-lg:h-[60%] max-lg:w-[60%] object-contain max-lg:mt-6" />
+        <img src={ManRocket} alt="ManRocket" className="max-lg:mt-6" />
       </div>
     </section>
   );

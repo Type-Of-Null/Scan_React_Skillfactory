@@ -23,7 +23,7 @@ export default function Auth() {
         <img
           id="key"
           src={keySvg}
-          className="h-[40vh] w-[55%] max-sm:w-full"
+          className="h-[40vh] w-[75%] max-sm:w-full"
           alt="..."
         />
       </div>
