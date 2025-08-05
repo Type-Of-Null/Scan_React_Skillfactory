@@ -1,5 +1,5 @@
 import keySvg from "../../assets/img/svg/AuthKey.svg";
-import { FormAuth } from "./FormAuth";
+import FormAuth  from "./FormAuth";
 
 export default function Auth() {
   return (

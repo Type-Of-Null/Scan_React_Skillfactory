@@ -4,7 +4,7 @@ import google from "../../assets/img/svg/google.svg";
 import facebook from "../../assets/img/svg/facebook.svg";
 import yandex from "../../assets/img/svg/yandex.svg";
 
-export function FormAuth() {
+export default function FormAuth() {
   const inputStyle =
     "my-[15px] h-[43px] rounded-[5px] border border-[#c7c7c7] px-5 text-base tracking-[0.01em] shadow-[0_0_20px_rgba(0,0,0,0.05)]";
   const labelStyle =
@@ -60,9 +60,9 @@ export function FormAuth() {
       </label>
 
       {/* Кнопка входа  */}
-      <button className="default-text h-15 w-full cursor-pointer rounded-[5px] border-[1px] border-[#C7C7C7] bg-[#5970FF] text-[22px] font-medium tracking-[0.01em] text-white">
+      <Link to="/search" className="default-text h-15 w-full cursor-pointer rounded-[5px] border-[1px] border-[#C7C7C7] bg-[#5970FF] text-[22px] font-medium tracking-[0.01em] text-white">
         Войти
-      </button>
+      </Link>
       <Link
         to="*"
         className="mt-[15px] text-[14px] tracking-[0.02em] text-[#5970FF] underline"
