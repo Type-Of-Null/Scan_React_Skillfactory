@@ -1,17 +1,53 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import lock from "../../assets/img/svg/Lock.svg";
 import google from "../../assets/img/svg/google.svg";
 import facebook from "../../assets/img/svg/facebook.svg";
 import yandex from "../../assets/img/svg/yandex.svg";
+import { observer } from "mobx-react-lite";
+import { useForm } from "react-hook-form";
+import { useAuthStore } from "../../stores";
+import { useEffect } from "react";
 
-export default function FormAuth() {
+const FormAuth = observer(() => {
+  const DEFAULT_VALUES = {
+    login: "sf_student1",
+    password: "4i2385j",
+  };
+  const authStore = useAuthStore();
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   store.userStore.token && navigate("/");
+  // });
+
+  const onSubmit = (data) => {
+    authStore.setLogin(data.login);
+    authStore.setPassword(data.password);
+    authStore.getToken();
+    console.log(data);
+    reset();
+  };
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: DEFAULT_VALUES,
+  });
+
   const inputStyle =
-    "my-[15px] h-[43px] rounded-[5px] border border-[#c7c7c7] px-5 text-base tracking-[0.01em] shadow-[0_0_20px_rgba(0,0,0,0.05)]";
+    "my-[5px] h-[43px] rounded-[5px] focus:border-blue-500 focus:outline-none border border-gray-300  px-5 text-base text-black tracking-[0.01em] shadow-[0_0_20px_rgba(0,0,0,0.05)]";
   const labelStyle =
     "relative mb-[15px] flex w-full flex-col text-[16px] leading-[19px] tracking-[0.02em] text-[#949494]";
 
   return (
-    <form className="relative col-start-2 row-start-1 row-end-3 mt-[10%] mr-[3%] mb-3 ml-[10%] flex flex-col items-center justify-between rounded-[10px] p-[25px] shadow-[0_0_20px_rgba(0,0,0,0.15)] md:max-w-3/4">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="relative col-start-2 row-start-1 row-end-3 mt-[10%] mr-[3%] mb-3 ml-[10%] flex flex-col items-center justify-between rounded-[10px] p-[25px] shadow-[0_0_20px_rgba(0,0,0,0.15)] md:max-w-3/4"
+    >
       {/* Lock изображение */}
       <img
         src={lock}
@@ -50,18 +86,59 @@ export default function FormAuth() {
       </div>
 
       {/* Ввод логина и пароля */}
+      {/* Логин */}
       <label className={labelStyle}>
         Логин или номер телефона:
-        <input className={inputStyle} type="text" />
+        <input
+          className={`${inputStyle} ${errors?.login ? "border-red-500" : ""}`}
+          type="text"
+          {...register("login", {
+            required: "Введите корректные данные",
+            autoComplete: "username",
+            pattern: {
+              value: /^[\w-]+$/,
+            },
+          })}
+        />
+        <div className="min-h-[30px]">
+          {(errors.login || authStore.isAuthError) && (
+            <p className="mt-1 text-center text-sm text-red-500">
+              {errors.login?.message || "Неправильный логин или пароль"}
+            </p>
+          )}
+        </div>
       </label>
+
+      {/* Пароль */}
       <label className={labelStyle}>
         Пароль:
-        <input className={inputStyle} type="password" />
+        <input
+          className={`${inputStyle} ${errors?.password ? "border-red-500" : ""}`}
+          type="password"
+          {...register("password", {
+            required: "Неправильный пароль",
+            autoComplete: "current-password",
+            placeholder: "Пароль",
+          })}
+        />
+        <div className="min-h-[30px]">
+          {errors.password && (
+            <p className="mt-1 text-center text-sm text-red-500">
+              {errors.password.message}
+            </p>
+          )}
+        </div>
       </label>
 
       {/* Кнопка входа  */}
 
-      <button type="submit" className="default-text flex h-15 w-full cursor-pointer items-center justify-center rounded-[5px] border-[1px] border-[#C7C7C7] bg-[#5970FF] text-[22px] font-medium tracking-[0.01em] text-white">
+      <button
+        type="submit"
+        disabled={!isValid}
+        className={`${
+          !isValid ? "bg-[#a0acfa]" : "cursor-pointer bg-[#5970FF]"
+        } default-text flex h-15 w-full items-center justify-center rounded-[5px] border-[1px] border-[#C7C7C7] text-[22px] font-medium tracking-[0.01em] text-white transition-colors duration-500 ease-in-out`}
+      >
         Войти
       </button>
 
@@ -89,4 +166,6 @@ export default function FormAuth() {
       </div>
     </form>
   );
-}
+});
+
+export default FormAuth;
