@@ -100,7 +100,6 @@ class AuthStore {
 			this.setIsLoggedIn(false);
 			this.clearAuthData();
 		} else {
-			console.log("Token is valid.");
 			this.setToken(token);
 			this.setIsLoggedIn(true);
 		}

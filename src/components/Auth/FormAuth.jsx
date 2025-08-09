@@ -46,6 +46,7 @@ const FormAuth = observer(() => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
+			name="auth-form"
       className="relative col-start-2 row-start-1 row-end-3 mt-[10%] mr-[3%] mb-3 ml-[10%] flex flex-col items-center justify-between rounded-[10px] p-[25px] shadow-[0_0_20px_rgba(0,0,0,0.15)] md:max-w-3/4"
     >
       {/* Lock изображение */}
@@ -92,9 +93,9 @@ const FormAuth = observer(() => {
         <input
           className={`${inputStyle} ${errors?.login ? "border-red-500" : ""}`}
           type="text"
+					autoComplete="username"
           {...register("login", {
             required: "Введите корректные данные",
-            autoComplete: "username",
             pattern: {
               value: /^[\w-]+$/,
             },
@@ -115,9 +116,9 @@ const FormAuth = observer(() => {
         <input
           className={`${inputStyle} ${errors?.password ? "border-red-500" : ""}`}
           type="password"
+					autoComplete="current-password"
           {...register("password", {
             required: "Неправильный пароль",
-            autoComplete: "current-password",
             placeholder: "Пароль",
           })}
         />
