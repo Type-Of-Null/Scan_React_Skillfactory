@@ -5,26 +5,26 @@ import facebook from "../../assets/img/svg/facebook.svg";
 import yandex from "../../assets/img/svg/yandex.svg";
 import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
-import { useAuthStore } from "../../stores";
+import { useAuthStore } from "../../stores/index";
 import { useEffect } from "react";
+import Loader from "../loader";
 
 const FormAuth = observer(() => {
+  const navigate = useNavigate();
+	const authStore = useAuthStore();
   const DEFAULT_VALUES = {
     login: "sf_student1",
     password: "4i2385j",
   };
-  const authStore = useAuthStore();
-  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   store.userStore.token && navigate("/");
-  // });
+  useEffect(() => {
+    authStore.token && navigate("/");
+  });
 
   const onSubmit = (data) => {
     authStore.setLogin(data.login);
     authStore.setPassword(data.password);
     authStore.getToken();
-    console.log(data);
     reset();
   };
 
@@ -139,7 +139,7 @@ const FormAuth = observer(() => {
           !isValid ? "bg-[#a0acfa]" : "cursor-pointer bg-[#5970FF]"
         } default-text flex h-15 w-full items-center justify-center rounded-[5px] border-[1px] border-[#C7C7C7] text-[22px] font-medium tracking-[0.01em] text-white transition-colors duration-500 ease-in-out`}
       >
-        Войти
+        {authStore.isLoading ? <Loader /> : "Войти"}
       </button>
 
       <Link

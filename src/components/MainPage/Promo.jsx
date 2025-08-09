@@ -1,6 +1,9 @@
 import PromoImg from "../../assets/img/promo.png";
+import { useAuthStore } from "../../stores";
 
 export default function Promo() {
+const authStore = useAuthStore();
+
   return (
     <section id="promo" className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12">
@@ -16,7 +19,7 @@ export default function Promo() {
           
           <button
             id="button_request"
-            className="bg-[#5970FF] text-white font-['Inter'] font-medium rounded-lg px-8 py-4 text-lg hover:bg-[#4758d4] transition-colors w-full sm:w-auto"
+            className={`${ authStore.isLoggedIn ? "" : "hidden" }bg-[#5970FF] text-white font-['Inter'] font-medium rounded-lg px-8 py-4 text-lg hover:bg-[#4758d4] transition-colors w-full sm:w-auto`}
           >
             Запросить данные
           </button>

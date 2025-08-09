@@ -60,7 +60,7 @@ export default function OurTarrifs() {
   return (
     <section
       id="ourTarrifs"
-      className="mt-[107.48px] ml-[5%] flex min-h-screen w-[95%] flex-col max-sm:ml-[14px] max-sm:w-[315px]"
+      className="mt-[107.48px] mx-[2%] flex min-h-screen  flex-col max-sm:ml-[14px] max-sm:w-[315px]"
     >
       <div
         id="text_tarrifs"
@@ -68,7 +68,7 @@ export default function OurTarrifs() {
       >
         наши тарифы
       </div>
-      <div id="container_tarrifs" className="flex gap-[5%] max-sm:flex-col">
+      <div id="container_tarrifs" className="flex gap-[5%] max-lg:flex-col items-center">
         {text_tarrifs.map((item) => (
           <div
             key={item.id}

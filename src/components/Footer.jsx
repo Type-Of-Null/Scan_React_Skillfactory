@@ -1,5 +1,6 @@
 import Scan_logo_footer from "../assets/img/scan_logo_footer.png";
-export default function Footer() {
+import { memo } from "react";
+function Footer() {
   return (
     <footer className="flex h-[137px] w-full justify-between bg-[#029491] max-sm:mt-auto max-sm:w-auto">
       <img
@@ -17,3 +18,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default memo(Footer)

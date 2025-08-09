@@ -1,8 +1,8 @@
 import { createContext, useContext } from "react";
-import AuthStore from "./auth.store";
+import authStore from "./auth.store";
 
 const rootStore = {
-  userStore: new AuthStore(),
+  userStore: authStore,
 };
 
 // Создаём контекст с привязкой к rootStore

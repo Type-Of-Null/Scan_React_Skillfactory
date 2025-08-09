@@ -9,9 +9,15 @@ class AuthStore {
 	password = "";
 	isAuthError = false;
 	isLoading = false;
+	isLoggedIn = false;
 
 	constructor() {
-		makeAutoObservable(this);
+		makeAutoObservable(this)
+		this.checkToken();
+		axios.interceptors.request.use(config => {
+			config.headers["Authorization"] = `Bearer ${this.token}`;
+			return config;
+		})
 	}
 
 	setLogin = (login) => {
@@ -26,45 +32,93 @@ class AuthStore {
 	setAuthError = (bool) => {
 		this.isAuthError = bool;
 	};
-
-
+	setIsLoggedIn = (bool) => {
+		this.isLoggedIn = bool;
+	};
 	setToken = (token) => {
-		axios.interceptors.request.use(config => {
-			config.headers["Authorization"] = `Bearer ${token}`;
-			return config;
-		});
 		this.token = token;
 	};
 
+	// Метод получения токена
 	getToken = () => {
 		this.setLoading(true);
 		axios
 			.post(API + `/api/v1/account/login`, {
 				login: `${this.login}`,
 				password: `${this.password}`,
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+				},
 			})
 			.then((response) => {
 				if (response.status === 200) {
 					this.setToken(response.data.accessToken);
 					localStorage.setItem("token", response.data.accessToken);
+					localStorage.setItem("expire", response.data.expire);
 					localStorage.setItem("login", this.login);
 					this.setLoading(false);
-					let currentDate = new Date();
-					let expire = currentDate.setDate(currentDate.getDate() + 2);
-					localStorage.setItem("expire", expire);
-					console.log('sdfsd')
+					this.setIsLoggedIn(true);
 				}
 			})
 			.catch((err) => {
 				console.log(err);
 				this.setAuthError(true);
 				this.setLoading(false);
-				localStorage.setItem("token", "");
+				localStorage.removeItem("token");
+				localStorage.removeItem("login");
 				this.setLogin("");
 				this.setPassword("");
+				this.setIsLoggedIn(false);
 			});
 	};
-	checkToken = () => { /* ... */ };
+
+	// Метод проверки токена
+	checkToken = () => {
+		const token = localStorage.getItem('token');
+		const expire = localStorage.getItem('expire');
+
+		if (!token || !expire) {
+			console.log("Token or expire time not found in localStorage.");
+			this.setIsLoggedIn(false);
+			this.clearAuthData();
+			return;
+		}
+
+		const expireTime = new Date(expire).getTime();
+		const now = new Date().getTime();
+
+		if (isNaN(expireTime)) {
+			console.log("Invalid expire time format.");
+			this.setIsLoggedIn(false);
+			this.clearAuthData();
+			return;
+		}
+
+		if (expireTime <= now) {
+			console.log("Token expired.");
+			this.setIsLoggedIn(false);
+			this.clearAuthData();
+		} else {
+			console.log("Token is valid.");
+			this.setToken(token);
+			this.setIsLoggedIn(true);
+		}
+	};
+
+	// Метод для очистки данных аутентификации
+	clearAuthData = () => {
+		localStorage.removeItem('token');
+		localStorage.removeItem('expire');
+		localStorage.removeItem('login');
+		this.setToken('');
+		this.setLogin('');
+		this.setPassword('');
+	};
+
+
+
 }
 
-export default AuthStore;
+const authStore = new AuthStore();
+export default authStore;
