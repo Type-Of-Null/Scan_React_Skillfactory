@@ -4,9 +4,10 @@ import BurgerButton from "../assets/img/svg/BurgerButton.svg";
 import Loader from "./loader";
 import NotSigned from "./UserBlock/NotSigned";
 import Signed from "./UserBlock/Signed";
-import { useAuthStore } from "../stores/index";
+import { useAuthStore } from "../stores";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
+import Companies from "./UserBlock/Companies";
 
 const link_style = "text-black h-[17px] hover:underline hover:text-blue-500";
 
@@ -34,7 +35,7 @@ const Header = observer(() => {
         />
       </Link>
       {/* Навигационная панель (только десктоп) */}
-      <nav className="container-nav default_text my-[38px] hidden h-[17px] items-center justify-between gap-4 font-['inter'] text-[14px] font-normal sm:inline-flex">
+      <nav className="container-nav default_text my-[38px] hidden h-[17px] items-center justify-between gap-4 font-['inter'] text-sm font-normal sm:inline-flex">
         <Link to="/" className={link_style}>
           Главная
         </Link>
@@ -47,7 +48,13 @@ const Header = observer(() => {
       </nav>
 
       {/* Блок авторизации (только десктоп) */}
-      {isLoggedIn ? <Signed /> : <NotSigned />}
+      {isLoggedIn ? (
+        <div className="flex">
+          <Companies /> <Signed />
+        </div>
+      ) : (
+        <NotSigned />
+      )}
 
       {/* Кнопка бургер меню (только мобилка) */}
       <button

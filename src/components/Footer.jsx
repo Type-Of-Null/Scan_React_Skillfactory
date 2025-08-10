@@ -10,7 +10,7 @@ function Footer() {
       />
       <div
         id="address"
-        className="mt-[25px] mr-[45px] flex flex-col text-right font-['Inter'] text-[14px] tracking-[-1%] whitespace-pre-line text-white max-sm:mt-[25px] max-sm:mr-[19px]"
+        className="mt-[25px] mr-[45px] flex flex-col text-right font-['Inter'] text-sm tracking-[-1%] whitespace-pre-line text-white max-sm:mt-[25px] max-sm:mr-[19px]"
       >
         <span>{"г. Москва, Цветной б-р, 40 \n +7 495 771 21 11 \ninfo@skan.ru"}</span>
         <span className="mt-[16px]">{"Copyright. 2025"}</span>

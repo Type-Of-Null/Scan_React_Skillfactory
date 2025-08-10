@@ -1,16 +1,8 @@
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
-
-const API = "https://gateway.scan-interfax.ru";
+import {API} from "../config"
 
 class AuthStore {
-	token = "";
-	login = "";
-	password = "";
-	isAuthError = false;
-	isLoading = false;
-	isLoggedIn = false;
-
 	constructor() {
 		makeAutoObservable(this)
 		this.checkToken();
@@ -20,13 +12,21 @@ class AuthStore {
 		})
 	}
 
-  setLogin = login => this.login = login;
-  setPassword = password => this.password = password;
-  setLoading = bool => this.isLoading = bool;
-  setAuthError = bool => this.isAuthError = bool;
-  setIsLoggedIn = bool => this.isLoggedIn = bool;
-  setToken = token => this.token = token;
-	
+	token = "";
+	login = "";
+	password = "";
+	isAuthError = false;
+	isLoading = false;
+	isLoggedIn = false;
+
+
+	setLogin = login => this.login = login;
+	setPassword = password => this.password = password;
+	setLoading = bool => this.isLoading = bool;
+	setAuthError = bool => this.isAuthError = bool;
+	setIsLoggedIn = bool => this.isLoggedIn = bool;
+	setToken = token => this.token = token;
+
 
 	// Метод получения токена
 	getToken = () => {
@@ -46,7 +46,6 @@ class AuthStore {
 					localStorage.setItem("token", response.data.accessToken);
 					localStorage.setItem("expire", response.data.expire);
 					localStorage.setItem("login", this.login);
-					this.setLoading(false);
 					this.setIsLoggedIn(true);
 					this.setAuthError(false)
 				}
@@ -54,9 +53,9 @@ class AuthStore {
 			.catch((err) => {
 				console.log(err);
 				this.setAuthError(true);
-				this.setLoading(false);
 				this.clearAuthData();
-			});
+			})
+			.finally(this.setLoading(false));
 	};
 
 	// Метод проверки токена
@@ -65,13 +64,13 @@ class AuthStore {
 		const expire = localStorage.getItem('expire');
 		const now = new Date().getTime();
 
-    if (!token || !expire || new Date(expire).getTime() <= now) {
-      this.clearAuthData();
-    } else {
-      this.setToken(token);
-      this.setIsLoggedIn(true);
-    }
-  };
+		if (!token || !expire || new Date(expire).getTime() <= now) {
+			this.clearAuthData();
+		} else {
+			this.setToken(token);
+			this.setIsLoggedIn(true);
+		}
+	};
 
 	// Метод для очистки данных аутентификации
 	clearAuthData = () => {

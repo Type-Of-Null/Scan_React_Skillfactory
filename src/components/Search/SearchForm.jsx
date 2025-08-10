@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 export const SearchForm = () => {
 	// Стили для элементов формы
   const searchInputStyle =
-    "text-[14px] rounded-[5px] border border-[#c7c7c7] bg-white shadow-[0_0_20px_rgba(0,0,0,0.05)] p-[13px] tracking-[0.03em] w-[60%]";
+    "text-sm rounded-[5px] border border-[#c7c7c7] bg-white shadow-[0_0_20px_rgba(0,0,0,0.05)] p-[13px] tracking-[0.03em] w-[60%]";
   const labelStyle = "mb-5 flex w-[91%] flex-col text-lg";
 	const searchDateStyle = " w-full rounded-[5px] border border-[#c7c7c7] p-[13px]"
 
@@ -69,7 +69,7 @@ export const SearchForm = () => {
               />
               <label
                 htmlFor="dateStart"
-                className="mt-2.5 text-[14px] text-gray-500"
+                className="mt-2.5 text-sm text-gray-500"
               >
                 Дата начала
               </label>
@@ -82,7 +82,7 @@ export const SearchForm = () => {
               />
               <label
                 htmlFor="dateEnd"
-                className="mt-2.5 text-[14px] text-gray-500"
+                className="mt-2.5 text-sm text-gray-500"
               >
                 Дата конца
               </label>

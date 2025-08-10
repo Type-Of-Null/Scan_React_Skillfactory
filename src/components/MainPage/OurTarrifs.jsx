@@ -111,7 +111,7 @@ export default function OurTarrifs() {
                     {item.priceDescription?.map((description, index) => (
                       <div
                         key={index}
-                        className="default_text mb-2.5 flex items-center font-['Inter'] text-[18px] font-normal max-sm:text-[14px]"
+                        className="default_text mb-2.5 flex items-center font-['Inter'] text-[18px] font-normal max-sm:text-sm"
                       >
                         <img
                           src={flagTarrifs}

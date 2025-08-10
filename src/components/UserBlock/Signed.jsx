@@ -13,7 +13,7 @@ const Signed = observer(() => {
   }, [authStore]);
 
   return (
-    <div className="sm:flex items-center gap-1 mr-16 hidden">
+    <section className="sm:flex items-center gap-1 mr-16 hidden">
       <div className="flex flex-col items-end">
         <span className="text-sm text-black opacity-70">{login}</span>
         <button
@@ -23,7 +23,7 @@ const Signed = observer(() => {
           }}
         >
           <Link
-            className="underline-none text-[14px] text-black hover:underline"
+            className="underline-none text-sm text-black hover:underline"
             to="/"
           >
             Выйти
@@ -32,7 +32,7 @@ const Signed = observer(() => {
       </div>
 			{/* По идее тут должна быть логика получения аватарки по id пользователя через API */}
       <img className="h-[32px] w-[32px]" src={smile} alt="user avatar" />
-    </div>
+    </section>
   );
 });
 

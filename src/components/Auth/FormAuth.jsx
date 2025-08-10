@@ -65,7 +65,7 @@ const FormAuth = observer(() => {
           to="/auth"
           end
           className={({ isActive }) =>
-            `mx-1 mb-10 pb-1 font-['Inter'] text-[16px] max-sm:px-0 max-sm:text-[14px] ${
+            `mx-1 mb-10 pb-1 font-['Inter'] text-[16px] max-sm:px-0 max-sm:text-sm ${
               isActive
                 ? "border-b-2 border-[#029491] text-[#029491]"
                 : "text-gray-500"
@@ -78,7 +78,7 @@ const FormAuth = observer(() => {
           to="*"
           end
           className={({ isActive }) =>
-            `mx-2.5 mb-10 pb-1 font-['Inter'] text-[16px] transition-colors max-sm:text-[14px] ${
+            `mx-2.5 mb-10 pb-1 font-['Inter'] text-[16px] transition-colors max-sm:text-sm ${
               isActive
                 ? "border-b-2 border-[#029491] text-[#029491]"
                 : "border-b-2 text-gray-500"
@@ -150,7 +150,7 @@ const FormAuth = observer(() => {
 
       <Link
         to="*"
-        className="mt-[15px] text-[14px] tracking-[0.02em] text-[#5970FF] underline"
+        className="mt-[15px] text-sm tracking-[0.02em] text-[#5970FF] underline"
       >
         Восстановить пароль
       </Link>
