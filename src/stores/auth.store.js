@@ -20,24 +20,13 @@ class AuthStore {
 		})
 	}
 
-	setLogin = (login) => {
-		this.login = login;
-	};
-	setPassword = (password) => {
-		this.password = password;
-	};
-	setLoading = (bool) => {
-		this.isLoading = bool;
-	};
-	setAuthError = (bool) => {
-		this.isAuthError = bool;
-	};
-	setIsLoggedIn = (bool) => {
-		this.isLoggedIn = bool;
-	};
-	setToken = (token) => {
-		this.token = token;
-	};
+  setLogin = login => this.login = login;
+  setPassword = password => this.password = password;
+  setLoading = bool => this.isLoading = bool;
+  setAuthError = bool => this.isAuthError = bool;
+  setIsLoggedIn = bool => this.isLoggedIn = bool;
+  setToken = token => this.token = token;
+	
 
 	// Метод получения токена
 	getToken = () => {
@@ -59,17 +48,14 @@ class AuthStore {
 					localStorage.setItem("login", this.login);
 					this.setLoading(false);
 					this.setIsLoggedIn(true);
+					this.setAuthError(false)
 				}
 			})
 			.catch((err) => {
 				console.log(err);
 				this.setAuthError(true);
 				this.setLoading(false);
-				localStorage.removeItem("token");
-				localStorage.removeItem("login");
-				this.setLogin("");
-				this.setPassword("");
-				this.setIsLoggedIn(false);
+				this.clearAuthData();
 			});
 	};
 
@@ -77,46 +63,26 @@ class AuthStore {
 	checkToken = () => {
 		const token = localStorage.getItem('token');
 		const expire = localStorage.getItem('expire');
-
-		if (!token || !expire) {
-			console.log("Token or expire time not found in localStorage.");
-			this.setIsLoggedIn(false);
-			this.clearAuthData();
-			return;
-		}
-
-		const expireTime = new Date(expire).getTime();
 		const now = new Date().getTime();
 
-		if (isNaN(expireTime)) {
-			console.log("Invalid expire time format.");
-			this.setIsLoggedIn(false);
-			this.clearAuthData();
-			return;
-		}
-
-		if (expireTime <= now) {
-			console.log("Token expired.");
-			this.setIsLoggedIn(false);
-			this.clearAuthData();
-		} else {
-			this.setToken(token);
-			this.setIsLoggedIn(true);
-		}
-	};
+    if (!token || !expire || new Date(expire).getTime() <= now) {
+      this.clearAuthData();
+    } else {
+      this.setToken(token);
+      this.setIsLoggedIn(true);
+    }
+  };
 
 	// Метод для очистки данных аутентификации
 	clearAuthData = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('expire');
 		localStorage.removeItem('login');
+		this.setIsLoggedIn(false);
 		this.setToken('');
 		this.setLogin('');
 		this.setPassword('');
 	};
-
-
-
 }
 
 const authStore = new AuthStore();

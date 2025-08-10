@@ -12,12 +12,15 @@ const link_style = "text-black h-[17px] hover:underline hover:text-blue-500";
 
 const Header = observer(() => {
   const authStore = useAuthStore();
-	const [isLoggedIn, setIsLoggedIn] = useState(authStore.isLoggedIn);
+  const [isLoggedIn, setIsLoggedIn] = useState(authStore.isLoggedIn);
 
-	useEffect(() => {
+  useEffect(() => {
     setIsLoggedIn(authStore.isLoggedIn);
   }, [authStore.isLoggedIn]);
 
+  useEffect(() => {
+    authStore.checkToken();
+  });
   return (
     <header
       id="header_container"
@@ -42,11 +45,10 @@ const Header = observer(() => {
           FAQ
         </Link>
       </nav>
-			<div>
 
       {/* Блок авторизации (только десктоп) */}
       {isLoggedIn ? <Signed /> : <NotSigned />}
-			</div>
+
       {/* Кнопка бургер меню (только мобилка) */}
       <button
         id="burgerButton"

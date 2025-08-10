@@ -1,6 +1,6 @@
 export default function Loader() {
   return (
-    <div className="grid min-h-[140px] w-full place-items-center overflow-x-scroll rounded-lg p-6 lg:overflow-visible">
+    <div className="flex items-center justify-center">
       <svg
         className="animate-spin text-gray-300"
         viewBox="0 0 64 64"

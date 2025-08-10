@@ -5,30 +5,33 @@ import { Link } from "react-router-dom";
 import smile from "../../assets/img/smile_avatar.png";
 
 const Signed = observer(() => {
-	const authStore = useAuthStore();
-	const login = localStorage.getItem("login");
+  const authStore = useAuthStore();
+  const login = localStorage.getItem("login");
 
   useEffect(() => {
     authStore.checkToken();
   }, [authStore]);
-	
+
   return (
-    <div className="">
-      <div className="user-info">
-        <span className="username">{login}</span>
+    <div className="sm:flex items-center gap-1 mr-16 hidden">
+      <div className="flex flex-col items-end">
+        <span className="text-sm text-black opacity-70">{login}</span>
         <button
-          className="logout"
+          className="border-none bg-transparent text-xs opacity-40"
           onClick={() => {
-            authStore.setToken("");
-            localStorage.clear();
+            authStore.clearAuthData();
           }}
         >
-          <Link className="header-nav__link" to="/">
+          <Link
+            className="underline-none text-[14px] text-black hover:underline"
+            to="/"
+          >
             Выйти
           </Link>
         </button>
       </div>
-      <img className="user-avatar" src={smile} alt="user avatar" />
+			{/* По идее тут должна быть логика получения аватарки по id пользователя через API */}
+      <img className="h-[32px] w-[32px]" src={smile} alt="user avatar" />
     </div>
   );
 });

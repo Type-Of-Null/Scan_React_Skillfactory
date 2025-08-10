@@ -11,23 +11,11 @@ import Loader from "../loader";
 
 const FormAuth = observer(() => {
   const navigate = useNavigate();
-	const authStore = useAuthStore();
+  const authStore = useAuthStore();
   const DEFAULT_VALUES = {
     login: "sf_student1",
     password: "4i2385j",
   };
-
-  useEffect(() => {
-    authStore.token && navigate("/");
-  });
-
-  const onSubmit = (data) => {
-    authStore.setLogin(data.login);
-    authStore.setPassword(data.password);
-    authStore.getToken();
-    reset();
-  };
-
   const {
     register,
     handleSubmit,
@@ -37,6 +25,21 @@ const FormAuth = observer(() => {
     mode: "onChange",
     defaultValues: DEFAULT_VALUES,
   });
+  const onSubmit = (data) => {
+    authStore.setLogin(data.login);
+    authStore.setPassword(data.password);
+    authStore.getToken();
+  };
+
+  useEffect(() => {
+    authStore.token && navigate("/");
+  });
+
+  useEffect(() => {
+    if (authStore.isLoggedIn) {
+      reset();
+    }
+  }, [authStore.isLoggedIn, reset]);
 
   const inputStyle =
     "my-[5px] h-[43px] rounded-[5px] focus:border-blue-500 focus:outline-none border border-gray-300  px-5 text-base text-black tracking-[0.01em] shadow-[0_0_20px_rgba(0,0,0,0.05)]";
@@ -46,7 +49,7 @@ const FormAuth = observer(() => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-			name="auth-form"
+      name="auth-form"
       className="relative col-start-2 row-start-1 row-end-3 mt-[10%] mr-[3%] mb-3 ml-[10%] flex flex-col items-center justify-between rounded-[10px] p-[25px] shadow-[0_0_20px_rgba(0,0,0,0.15)] md:max-w-3/4"
     >
       {/* Lock изображение */}
@@ -93,7 +96,7 @@ const FormAuth = observer(() => {
         <input
           className={`${inputStyle} ${errors?.login ? "border-red-500" : ""}`}
           type="text"
-					autoComplete="username"
+          autoComplete="username"
           {...register("login", {
             required: "Введите корректные данные",
             pattern: {
@@ -116,7 +119,7 @@ const FormAuth = observer(() => {
         <input
           className={`${inputStyle} ${errors?.password ? "border-red-500" : ""}`}
           type="password"
-					autoComplete="current-password"
+          autoComplete="current-password"
           {...register("password", {
             required: "Неправильный пароль",
             placeholder: "Пароль",
@@ -137,8 +140,10 @@ const FormAuth = observer(() => {
         type="submit"
         disabled={!isValid}
         className={`${
-          !isValid ? "bg-[#a0acfa]" : "cursor-pointer bg-[#5970FF]"
-        } default-text flex h-15 w-full items-center justify-center rounded-[5px] border-[1px] border-[#C7C7C7] text-[22px] font-medium tracking-[0.01em] text-white transition-colors duration-500 ease-in-out`}
+          !isValid
+            ? "bg-[#a0acfa]"
+            : "cursor-pointer bg-[#5970FF] hover:bg-[#4a66c8]"
+        } default-text flex h-15 w-full items-center justify-center rounded-[5px] border-[1px] border-[#C7C7C7] text-[22px] font-medium tracking-[0.01em] text-white transition-colors duration-300 ease-in-out`}
       >
         {authStore.isLoading ? <Loader /> : "Войти"}
       </button>
