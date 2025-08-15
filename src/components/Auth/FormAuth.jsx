@@ -7,15 +7,13 @@ import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
 import { useAuthStore } from "../../stores/index";
 import { useEffect } from "react";
+import { DEFAULT_VALUES } from "../../config";
 import Loader from "../loader";
 
 const FormAuth = observer(() => {
   const navigate = useNavigate();
   const authStore = useAuthStore();
-  const DEFAULT_VALUES = {
-    login: "sf_student1",
-    password: "4i2385j",
-  };
+
   const {
     register,
     handleSubmit,
@@ -25,6 +23,7 @@ const FormAuth = observer(() => {
     mode: "onChange",
     defaultValues: DEFAULT_VALUES,
   });
+	
   const onSubmit = (data) => {
     authStore.setLogin(data.login);
     authStore.setPassword(data.password);
@@ -138,7 +137,7 @@ const FormAuth = observer(() => {
 
       <button
         type="submit"
-        disabled={!isValid}
+        disabled={!isValid || authStore.isLoading} //Запрет повторного запроса
         className={`${
           !isValid
             ? "bg-[#a0acfa]"

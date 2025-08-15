@@ -3,10 +3,10 @@ import { observer } from "mobx-react-lite";
 import { useAuthStore } from "../../stores";
 import { Link } from "react-router-dom";
 import smile from "../../assets/img/smile_avatar.png";
+import { DEFAULT_VALUES } from "../../config";
 
 const Signed = observer(() => {
   const authStore = useAuthStore();
-  const login = localStorage.getItem("login");
 
   useEffect(() => {
     authStore.checkToken();
@@ -15,7 +15,7 @@ const Signed = observer(() => {
   return (
     <section className="sm:flex items-center gap-1 mr-16 hidden">
       <div className="flex flex-col items-end">
-        <span className="text-sm text-black opacity-70">{login}</span>
+        <span className="text-sm text-black opacity-70">{DEFAULT_VALUES.username}</span>
         <button
           className="border-none bg-transparent text-xs opacity-40"
           onClick={() => {

@@ -1,12 +1,12 @@
 import { createContext, useContext } from "react";
 import authStore from "./auth.store";
 import compStore from "./company.store";
-
-const API = "https://gateway.scan-interfax.ru";
+import searchStore from "./search.store";
 
 const rootStore = {
 	userStore: authStore,
 	companyStore: compStore,
+	searchStore: searchStore
 };
 
 // Создаём контекст с привязкой к rootStore
@@ -17,4 +17,5 @@ export const useStore = () => useContext(StoreContext);
 
 export const useAuthStore = () => useStore().userStore;
 export const useCompanyStore = () => useStore().companyStore;
+export const useSearchStore = () => useStore().searchStore;
 export default rootStore;

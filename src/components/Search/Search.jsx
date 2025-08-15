@@ -1,7 +1,7 @@
 import ManRocket from "../../assets/img/svg/ManRocket.svg";
 import Document from "../../assets/img/svg/Document.svg";
 import Folders from "../../assets/img/svg/Folders.svg";
-import { SearchForm } from "./SearchForm";
+import SearchForm from "./SearchForm";
 
 export default function Search() {
   return (

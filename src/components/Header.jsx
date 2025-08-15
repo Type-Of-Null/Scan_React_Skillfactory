@@ -49,7 +49,7 @@ const Header = observer(() => {
 
       {/* Блок авторизации (только десктоп) */}
       {isLoggedIn ? (
-        <div className="flex">
+        <div className="flex lg:gap-6">
           <Companies /> <Signed />
         </div>
       ) : (

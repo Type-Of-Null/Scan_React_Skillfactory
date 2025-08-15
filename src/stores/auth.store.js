@@ -55,7 +55,9 @@ class AuthStore {
 				this.setAuthError(true);
 				this.clearAuthData();
 			})
-			.finally(this.setLoading(false));
+			.finally(() => {
+				this.setLoading(false);
+			});
 	};
 
 	// Метод проверки токена
@@ -63,8 +65,19 @@ class AuthStore {
 		const token = localStorage.getItem('token');
 		const expire = localStorage.getItem('expire');
 		const now = new Date().getTime();
-
-		if (!token || !expire || new Date(expire).getTime() <= now) {
+	
+		if (!token || !expire) {
+			this.clearAuthData();
+			return;
+		}
+	
+		const expireTime = new Date(expire).getTime();
+		if (isNaN(expireTime)) {
+			this.clearAuthData();
+			return;
+		}
+	
+		if (expireTime <= now) {
 			this.clearAuthData();
 		} else {
 			this.setToken(token);
@@ -72,7 +85,6 @@ class AuthStore {
 		}
 	};
 
-	// Метод для очистки данных аутентификации
 	clearAuthData = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem('expire');

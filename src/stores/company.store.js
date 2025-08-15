@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 import { API } from "../config"
 import authStore from "./auth.store";
 
+
 class CompaniesStore {
 	constructor() {
 		makeAutoObservable(this);
@@ -33,6 +34,7 @@ class CompaniesStore {
 			})
 			.catch(console.error)
 			.finally(this.setCompaniesLoading(false));
+
 	};
 }
 
