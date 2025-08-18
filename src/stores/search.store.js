@@ -4,6 +4,10 @@ import { API } from "../config";
 
 
 class SearchStore {
+	constructor() {
+		makeAutoObservable(this);
+	}
+
 	searchFormChecks = {
 		isFullness: false,
 		isBusiness: false,
@@ -21,9 +25,8 @@ class SearchStore {
 		inn: null,
 		tonality: "any",
 		limit: 0,
-		startDate: new Date(),
+		startDate: new Date(2025, 0, 1),
 		endDate: new Date(),
-		summaryResult: null,
 		summaryDates: [],
 		summaryTotal: [],
 		summaryRisks: [],
@@ -32,8 +35,69 @@ class SearchStore {
 		document: [],
 	};
 
-	constructor() {
-		makeAutoObservable(this);
+	// Параметры запроса гистограмм
+	searchParamsHistograms = {
+		issueDateInterval: {
+			startDate: this.state.startDate.toISOString().split('T')[0],
+			endDate: this.state.endDate.toISOString().split('T')[0],
+		},
+		searchContext: {
+			targetSearchEntitiesContext: {
+				targetSearchEntities: [
+					{
+						type: "company",
+						sparkId: null,
+						entityId: null,
+						inn: this.state.inn,
+						maxFullness: this.searchFormChecks.isFullness,
+						inBusinessNews: this.searchFormChecks.isBusiness,
+					},
+				],
+				onlyMainRole: this.searchFormChecks.isMainRole,
+				tonality: this.state.tonality,
+				onlyWithRiskFactors: this.searchFormChecks.isRisksOnly,
+				riskFactors: {
+					and: [],
+					or: [],
+					not: [],
+				},
+				themes: {
+					and: [],
+					or: [],
+					not: [],
+				},
+			},
+			themesFilter: {
+				and: [],
+				or: [],
+				not: [],
+			},
+		},
+		searchArea: {
+			includedSources: [],
+			excludedSources: [],
+			includedSourceGroups: [],
+			excludedSourceGroups: [],
+		},
+		attributeFilters: {
+			excludeTechNews: this.searchFormChecks.isTechNews,
+			excludeAnnouncements: this.searchFormChecks.isAnnouncement,
+			excludeDigests: this.searchFormChecks.isNews,
+		},
+		similarMode: "duplicates",
+		limit: this.state.limit,
+		sortType: "issueDate",
+		sortDirectionType: "desc",
+		intervalType: "month",
+		histogramTypes: ["totalDocuments", "riskFactors"],
+	}
+	// Параметры запроса по ID документов
+	searchParamsIdDocuments = {
+		...this.searchParamsHistograms, attributeFilters: {
+			excludeTechNews: this.searchFormChecks.isTechNews,
+			excludeAnnouncements: this.searchFormChecks.isAnnouncement,
+			excludeDigests: this.searchFormChecks.isNews,
+		},
 	}
 
 	// Сеттер для состояний формы
@@ -53,142 +117,10 @@ class SearchStore {
 		});
 	};
 
-	// Запросы
-	getHistograms = () => {
-		this.setState("isLoading", true);
-		axios
-			.post(API + `/api/v1/objectsearch/histograms`, {
-				issueDateInterval: {
-					startDate: this.state.startDate,
-					endDate: this.state.endDate,
-				},
-				searchContext: {
-					targetSearchEntitiesContext: {
-						targetSearchEntities: [
-							{
-								type: "company",
-								sparkId: null,
-								entityId: null,
-								inn: this.state.inn,
-								maxFullness: this.searchFormChecks.isFullness,
-								inBusinessNews: this.searchFormChecks.isBusiness,
-							},
-						],
-						onlyMainRole: this.searchFormChecks.isMainRole,
-						tonality: this.state.tonality,
-						onlyWithRiskFactors: this.searchFormChecks.isRisksOnly,
-						riskFactors: {
-							and: [],
-							or: [],
-							not: [],
-						},
-						themes: {
-							and: [],
-							or: [],
-							not: [],
-						},
-					},
-					themesFilter: {
-						and: [],
-						or: [],
-						not: [],
-					},
-				},
-				searchArea: {
-					includedSources: [],
-					excludedSources: [],
-					includedSourceGroups: [],
-					excludedSourceGroups: [],
-				},
-				attributeFilters: {
-					excludeTechNews: this.searchFormChecks.isTechNews,
-					excludeAnnouncements: this.searchFormChecks.isAnnouncement,
-					excludeDigests: this.searchFormChecks.isNews,
-				},
-				similarMode: "duplicates",
-				limit: this.state.limit,
-				sortType: "issueDate",
-				sortDirectionType: "desc",
-				intervalType: "month",
-				histogramTypes: ["totalDocuments", "riskFactors"],
-			})
-			.then((response) => {
-				this.setState("summaryResult", response);
-				if (
-					this.state.summaryResult.status === 200 &&
-					this.state.summaryResult.data.data.length > 0 &&
-					this.state.summaryResult.data.data !== undefined
-				) {
-					this.setState("isLoading", false);
-				} else {
-					this.setState("isError", true);
-					this.setState("isLoading", false);
-				}
-			})
-			.catch((err) => {
-				this.setState("isError", true);
-				console.log(err);
-				this.setState("isLoading", false);
-			});
-	};
 
 	getIDs = () => {
 		axios
-			.post(API + `/api/v1/objectsearch`, {
-				issueDateInterval: {
-					startDate: this.state.startDate,
-					endDate: this.state.endDate,
-				},
-				searchContext: {
-					targetSearchEntitiesContext: {
-						targetSearchEntities: [
-							{
-								type: "company",
-								sparkId: null,
-								entityId: null,
-								inn: this.state.inn,
-								maxFullness: this.searchFormChecks.isFullness,
-								inBusinessNews: this.searchFormChecks.isBusiness,
-							},
-						],
-						onlyMainRole: this.searchFormChecks.isMainRole,
-						tonality: this.state.tonality,
-						onlyWithRiskFactors: this.searchFormChecks.isRisksOnly,
-						riskFactors: {
-							and: [],
-							or: [],
-							not: [],
-						},
-						themes: {
-							and: [],
-							or: [],
-							not: [],
-						},
-					},
-					themesFilter: {
-						and: [],
-						or: [],
-						not: [],
-					},
-				},
-				searchArea: {
-					includedSources: [],
-					excludedSources: [],
-					includedSourceGroups: [],
-					excludedSourceGroups: [],
-				},
-				attributeFilters: {
-					excludeTechNews: this.searchFormChecks.isTechNews,
-					excludeAnnouncements: this.searchFormChecks.isAnnouncement,
-					excludeDigests: this.searchFormChecks.isNews,
-				},
-				similarMode: "duplicates",
-				limit: this.limit,
-				sortType: "issueDate",
-				sortDirectionType: "desc",
-				intervalType: "month",
-				histogramTypes: ["totalDocuments", "riskFactors"],
-			})
+			.post(API + `/api/v1/objectsearch`, this.searchParamsIdDocuments)
 			.then((response) => {
 				let docID = [];
 				response.data.items.map((id) => {

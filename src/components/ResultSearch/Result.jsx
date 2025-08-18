@@ -1,6 +1,12 @@
+import TotalSlider from "./TotalSlider";
 import womanTarget from "../../assets/img/svg/WomanTarget.svg";
+import { useSearchStore } from "../../stores";
+import { Link } from "react-router-dom";
+import Loader from "../Loader";
 
 export default function Result() {
+  const searchStore = useSearchStore();
+
   return (
     <div className="search-result">
       <div className="flex justify-between p-4 lg:p-8">
@@ -16,7 +22,24 @@ export default function Result() {
           alt="woman with target"
         />
       </div>
-
+      {searchStore.state.isError ? (
+        <p className="search-result__error search-result-error__info">
+          Что-то пошло не так :( <br />
+          Попробуйте <Link to="/search">изменить параметры поиска</Link>
+        </p>
+      ) : (
+        <div>
+          {searchStore.state.isLoading ? (
+            <div className="slider-loader">
+              <Loader />
+              <p className="loading-data">Загружаем данные</p>
+            </div>
+          ) : (
+            <TotalSlider />
+          )}
+          {/* <Documents /> */}
+        </div>
+      )}
       <div></div>
     </div>
   );

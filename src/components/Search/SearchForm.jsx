@@ -7,11 +7,13 @@ import { useAuthStore } from "../../stores/index";
 import { useNavigate } from "react-router-dom";
 import { useSearchStore } from "../../stores/index";
 import { DEFAULT_VALUES } from "../../config";
+import { useGetHistograms } from "../Requests/GetHistograms";
 
 const SearchForm = observer(() => {
   const navigate = useNavigate();
   const authStore = useAuthStore();
   const searchStore = useSearchStore();
+	const fetchHistograms = useGetHistograms();
 
   // Стили для элементов формы
   const searchInputStyle =
@@ -40,15 +42,44 @@ const SearchForm = observer(() => {
     defaultValues: DEFAULT_VALUES,
   });
 
-  const onSubmit = (data) => {
-    searchStore.setState("isEroor", false);
+  const onSubmit = async (data) => {
+    searchStore.setState("isError", false);
     searchStore.setState("inn", data.inn);
     searchStore.setState("limit", data.limit);
-    searchStore.getHistograms();
-    searchStore.setState("setDocument", []);
-    searchStore.setState("Id", {});
-    searchStore.getIDs();
-    navigate("/result");
+    searchStore.setState("document", []);
+    searchStore.setState("IDs", {});
+
+    searchStore.searchParamsHistograms = {
+      ...searchStore.searchParamsHistograms,
+      issueDateInterval: {
+        startDate: searchStore.state.startDate.toISOString().split("T")[0],
+        endDate: searchStore.state.endDate.toISOString().split("T")[0],
+      },
+      searchContext: {
+        targetSearchEntitiesContext: {
+          targetSearchEntities: [
+            {
+              type: "company",
+              inn: data.inn,
+              maxFullness: searchStore.searchFormChecks.isFullness,
+              inBusinessNews: searchStore.searchFormChecks.isBusiness,
+            },
+          ],
+          onlyMainRole: searchStore.searchFormChecks.isMainRole,
+          tonality: searchStore.state.tonality,
+          onlyWithRiskFactors: searchStore.searchFormChecks.isRisksOnly,
+        },
+      },
+      limit: data.limit,
+    };
+		try {
+			await fetchHistograms(); // 🟢 Ожидание завершения
+			if (!searchStore.state.isError) {
+				navigate("/result");
+			}
+		} catch (error) {
+			console.error("Ошибка:", error);
+		}
   };
 
   useEffect(() => {
@@ -58,9 +89,11 @@ const SearchForm = observer(() => {
   useEffect(() => {
     searchStore.resetChecks();
   });
+
   return (
     // Форма поиска
     <form
+      name="searchForm"
       className="mt-[50px] flex max-w-[872px] justify-between gap-3 rounded-[10px] px-[40px] py-[30px] shadow-[0_0_20px_rgba(0,0,0,0.2)] max-md:flex-col"
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -120,7 +153,7 @@ const SearchForm = observer(() => {
             placeholder="От 1 до 1000"
             {...register("limit", {
               required: true,
-              min: { value: 0 },
+              min: { value: 5 },
               max: 1000,
             })}
             min="0" // Ограничение на ввод отрицательных зхначений
@@ -165,15 +198,14 @@ const SearchForm = observer(() => {
                 id="dateEnd"
                 className={searchDateStyle}
                 dateFormat="dd.MM.yyyy"
-								required={true}
-								startDate={searchStore.state.startDate}
-								selected={searchStore.state.endDate}
-								minDate={searchStore.state.startDate}
-								maxDate={new Date()}
-								onChange={(endDate) => {
+                required={true}
+                startDate={searchStore.state.startDate}
+                selected={searchStore.state.endDate}
+                minDate={searchStore.state.startDate}
+                maxDate={new Date()}
+                onChange={(endDate) => {
                   searchStore.setState("endDate", endDate);
                 }}
-
               />
               <label htmlFor="dateEnd" className="mt-2.5 text-sm text-gray-500">
                 Дата конца
@@ -192,9 +224,9 @@ const SearchForm = observer(() => {
                 id={id}
                 type="checkbox"
                 className="cursor-pointer opacity-[40%]"
-								onChange={() => {
-									searchStore.toggleCheck(label);
-								}}
+                onChange={() => {
+                  searchStore.toggleCheck(label);
+                }}
               />
               <label htmlFor={id} className="ml-2 text-gray-700">
                 {label}
@@ -206,9 +238,9 @@ const SearchForm = observer(() => {
         {/* Кнопка */}
         <div className="mt-[25px] w-full self-center">
           <button
-					disabled={!isValid}
+            disabled={!isValid}
             type="submit"
-            className="w-full rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700 disabled:opacity-50 enabled:cursor-pointer"
+            className="w-full rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700 enabled:cursor-pointer disabled:opacity-50"
           >
             Поиск
           </button>

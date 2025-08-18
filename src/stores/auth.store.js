@@ -6,10 +6,10 @@ class AuthStore {
 	constructor() {
 		makeAutoObservable(this)
 		this.checkToken();
-		axios.interceptors.request.use(config => {
-			config.headers["Authorization"] = `Bearer ${this.token}`;
-			return config;
-		})
+		// axios.interceptors.request.use(config => {
+		// 	config.headers["Authorization"] = `Bearer ${this.token}`;
+		// 	return config;
+		// })
 	}
 
 	token = "";
