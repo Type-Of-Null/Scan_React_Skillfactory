@@ -6,6 +6,7 @@ import { API } from "../config";
 class SearchStore {
 	constructor() {
 		makeAutoObservable(this);
+		this.loadState();
 	}
 
 	searchFormChecks = {
@@ -100,14 +101,43 @@ class SearchStore {
 		},
 	}
 
+ // Метод для сохранения состояния в localStorage
+ saveState = () => {
+	const stateToSave = {
+		searchFormChecks: this.searchFormChecks,
+		state: {
+			...this.state,
+			startDate: this.state.startDate.toISOString(),
+			endDate: this.state.endDate.toISOString(),
+		},
+	};
+	localStorage.setItem('searchStoreState', JSON.stringify(stateToSave));
+};
+
+// Метод для загрузки состояния из localStorage
+loadState = () => {
+	const savedState = localStorage.getItem('searchStoreState');
+	if (savedState) {
+		const parsedState = JSON.parse(savedState);
+		this.searchFormChecks = parsedState.searchFormChecks;
+		this.state = {
+			...parsedState.state,
+			startDate: new Date(parsedState.state.startDate),
+			endDate: new Date(parsedState.state.endDate),
+		};
+	}
+};
+
 	// Сеттер для состояний формы
 	setState = (key, value) => {
 		this.state[key] = value;
+		this.saveState();
 	};
 
 	// Переключатель для чекбоксов
 	toggleCheck = (type) => {
 		this.searchFormChecks[type] = !this.searchFormChecks[type];
+		this.saveState();
 	};
 
 	// Сброс чекбоксов
