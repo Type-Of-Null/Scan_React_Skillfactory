@@ -41,12 +41,7 @@ export const useGetHistograms = () => {
             return date_a - date_b;
           });
 
-					searchStore.setState("combinedResults", sortedResult)
-					console.log(combinedResult)
-					console.log(sortedResult)
-					console.log(searchStore.state.combinedResults)
-					// console.log(risks)
-
+          searchStore.setState("combinedResults", sortedResult);
 
           const totalSum = totals.reduce((a, b) => a + b, 0);
           const risksSum = risks.reduce((a_1, b_1) => a_1 + b_1, 0);
