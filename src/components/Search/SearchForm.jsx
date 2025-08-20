@@ -7,7 +7,7 @@ import { useAuthStore } from "../../stores/index";
 import { useNavigate } from "react-router-dom";
 import { useSearchStore } from "../../stores/index";
 import { DEFAULT_VALUES } from "../../config";
-import { useGetHistograms } from "../Requests/GetHistograms";
+import { useGetHistograms } from "../requestsHooks/useGetHistograms";
 
 const SearchForm = observer(() => {
   const navigate = useNavigate();
@@ -151,12 +151,13 @@ const SearchForm = observer(() => {
             className={`-full ${searchInputStyle}`}
             type="number"
             placeholder="От 1 до 1000"
+						defaultValue={5}
             {...register("limit", {
               required: true,
-              min: { value: 5 },
+              min: { value: 0 },
               max: 1000,
             })}
-            min="0" // Ограничение на ввод отрицательных зхначений
+            min="0"
           />
           {errors?.limit && (
             <p className="absolute mt-1 text-sm text-red-500">

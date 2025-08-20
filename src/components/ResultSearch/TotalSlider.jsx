@@ -1,54 +1,7 @@
 import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Loader from "../Loader";
+import Loader from "../loader";
 import { useSearchStore } from "../../stores";
 import { observer } from "mobx-react-lite";
-
-let settings = {
-  dots: false,
-  infinite: false,
-  slidesToShow: 8,
-  slidesToScroll: 3,
-  responsive: [
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 6,
-        slidesToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 1000,
-      settings: {
-        slidesToShow: 5,
-        slidesToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 940,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 2,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-      },
-    },
-    {
-      breakpoint: 550,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
-};
 
 const TotalSlider = observer(() => {
   const searchStore = useSearchStore();
@@ -56,32 +9,39 @@ const TotalSlider = observer(() => {
   return (
     <div>
       {searchStore.state.isLoading === true ? (
-        <div className="slider-loader">
+        <div className="my-12 flex h-40 flex-col items-center justify-center rounded-[10px] border-2 border-[#029491]">
           <Loader />
-          <p className="loading-data">Загружаем данные</p>
+          <p className="mt-2.5 text-lg tracking-[2%] text-black">
+            Загружаем данные
+          </p>
         </div>
       ) : (
         <>
-          <h3 className="summary-title">Общая сводка</h3>
-          <p className="summary-all">
+          <h3 className="font-ferry text-[30px] font-bold tracking-[2%] text-black">
+            Общая сводка
+          </h3>
+          <p className="default-text font-['Inter'] text-[18px] tracking-[2%] text-[#949494]">
             Найдено {searchStore.state.summaryAll} вариантов
           </p>
-          <div className="slider-wrapper">
-            <div className="slider-titles">
+          <div className="flex border border-amber-400 max-sm:static max-sm:flex-row">
+            <div className="static h-auto w-auto flex-row rounded-t-[10px]">
               <p>Период</p>
               <p>Всего</p>
               <p>Риски</p>
             </div>
-            <Slider className="summary-slider" {...settings}>
-              {searchStore.state.summaryDates &&
-                searchStore.state.summaryDates.map((el, index) => (
-                  <div className="slider-item" key={index}>
-                    <p>{el}</p>
-                    <p>{searchStore.state.summaryTotal[index]}</p>
-                    <p>{searchStore.state.summaryRisks[index]}</p>
+            {searchStore.state.combinedResults &&
+              searchStore.state.combinedResults.map(
+                ([date, total, risk], index) => (
+                  <div
+                    className="flex flex-col border-0 px-[27px] py-[17px]"
+                    key={index}
+                  >
+                    <p>{date}</p>
+                    <p>{total}</p>
+                    <p>{risk}</p>
                   </div>
-                ))}
-            </Slider>
+                ),
+              )}
           </div>
         </>
       )}
