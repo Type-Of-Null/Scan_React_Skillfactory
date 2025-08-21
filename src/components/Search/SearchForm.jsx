@@ -8,12 +8,14 @@ import { useNavigate } from "react-router-dom";
 import { useSearchStore } from "../../stores/index";
 import { DEFAULT_VALUES } from "../../config";
 import { useGetHistograms } from "../requestsHooks/useGetHistograms";
+import { useGetIDArticles } from "../requestsHooks/useGetIDArticles";
 
 const SearchForm = observer(() => {
   const navigate = useNavigate();
   const authStore = useAuthStore();
   const searchStore = useSearchStore();
-	const fetchHistograms = useGetHistograms();
+  const fetchHistograms = useGetHistograms();
+	const fetchIDArticle = useGetIDArticles();
 
   // Стили для элементов формы
   const searchInputStyle =
@@ -43,42 +45,19 @@ const SearchForm = observer(() => {
   });
 
   const onSubmit = async (data) => {
-    searchStore.setState("isError", false);
-    searchStore.setState("inn", data.inn);
-    searchStore.setState("limit", data.limit);
-    searchStore.setState("document", []);
-    searchStore.setState("IDs", {});
-
-    searchStore.searchParamsHistograms = {
-      ...searchStore.searchParamsHistograms,
-      issueDateInterval: {
-        startDate: searchStore.state.startDate.toISOString().split("T")[0],
-        endDate: searchStore.state.endDate.toISOString().split("T")[0],
-      },
-      searchContext: {
-        targetSearchEntitiesContext: {
-          targetSearchEntities: [
-            {
-              type: "company",
-              inn: data.inn,
-              maxFullness: searchStore.searchFormChecks.isFullness,
-              inBusinessNews: searchStore.searchFormChecks.isBusiness,
-            },
-          ],
-          onlyMainRole: searchStore.searchFormChecks.isMainRole,
-          tonality: searchStore.state.tonality,
-          onlyWithRiskFactors: searchStore.searchFormChecks.isRisksOnly,
-        },
-      },
-      limit: data.limit,
-    };
-		try {
-			await fetchHistograms();
-				navigate("/result");
-				
-		} catch (error) {
-			console.error("Ошибка:", error);
-		}
+		searchStore.setState("isError", false);
+		searchStore.setState("inn", data.inn);
+		searchStore.setState("limit", data.limit);
+		searchStore.setState("document", []);
+		searchStore.setState("IDs", {});
+		
+    try {
+      await fetchHistograms();
+      await fetchIDArticle();
+      navigate("/result");
+    } catch (error) {
+      console.error("Ошибка:", error);
+    }
   };
 
   useEffect(() => {
@@ -150,7 +129,7 @@ const SearchForm = observer(() => {
             className={`-full ${searchInputStyle}`}
             type="number"
             placeholder="От 1 до 1000"
-						defaultValue={5}
+            defaultValue={5}
             {...register("limit", {
               required: true,
               min: { value: 0 },
