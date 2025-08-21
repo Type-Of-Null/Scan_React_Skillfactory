@@ -73,10 +73,9 @@ const SearchForm = observer(() => {
       limit: data.limit,
     };
 		try {
-			await fetchHistograms(); // 🟢 Ожидание завершения
-			if (!searchStore.state.isError) {
+			await fetchHistograms();
 				navigate("/result");
-			}
+				
 		} catch (error) {
 			console.error("Ошибка:", error);
 		}
