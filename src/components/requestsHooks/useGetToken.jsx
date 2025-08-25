@@ -15,12 +15,6 @@ export const useGetToken = () => {
           login,
           password,
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        }
       );
 
       if (response.status === 200) {

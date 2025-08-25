@@ -13,7 +13,7 @@ class CompaniesStore {
 	setCompaniesLoading = bool => this.isCompaniesLoading = bool;
 
 	companiesInfo = { used: 0, limit: 0 };
-	setCompanyLimits = (used, limit) => {
+		setCompanyLimits = (used, limit) => {
 		this.companiesInfo.used = used;
 		this.companiesInfo.limit = limit;
 	};
