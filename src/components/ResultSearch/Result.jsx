@@ -2,8 +2,8 @@ import TotalSlider from "./TotalSlider";
 import womanTarget from "../../assets/img/svg/WomanTarget.svg";
 import { useSearchStore } from "../../stores";
 import { Link } from "react-router-dom";
-import Loader from "../loader"; // Добавляем импорт Loader
-
+import Loader from "../loader";
+import ListOfArticles from "./ListOfArticles";
 export default function Result() {
   const searchStore = useSearchStore();
 
@@ -29,7 +29,7 @@ export default function Result() {
         <div className="rounded-lg bg-red-50 p-6 text-center">
           <p className="text-lg text-red-800">
             Нет данных для отображения <br />
-            Попробуйте {" "}
+            Попробуйте{" "}
             <Link to="/search" className="text-blue-600 underline">
               изменить параметры поиска
             </Link>
@@ -45,6 +45,7 @@ export default function Result() {
           ) : (
             <TotalSlider />
           )}
+          <ListOfArticles />
         </div>
       )}
     </section>

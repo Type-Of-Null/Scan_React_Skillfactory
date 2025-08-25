@@ -134,7 +134,6 @@ const FormAuth = observer(() => {
       </label>
 
       {/* Кнопка входа  */}
-
       <button
         type="submit"
         disabled={!isValid || authStore.isLoading} //Запрет повторного запроса

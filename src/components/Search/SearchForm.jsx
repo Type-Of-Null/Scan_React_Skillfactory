@@ -9,13 +9,14 @@ import { useSearchStore } from "../../stores/index";
 import { DEFAULT_VALUES } from "../../config";
 import { useGetHistograms } from "../requestsHooks/useGetHistograms";
 import { useGetIDArticles } from "../requestsHooks/useGetIDArticles";
+import Loader from "../Loader";
 
 const SearchForm = observer(() => {
   const navigate = useNavigate();
   const authStore = useAuthStore();
   const searchStore = useSearchStore();
   const fetchHistograms = useGetHistograms();
-	const fetchIDArticle = useGetIDArticles();
+  const fetchIDArticle = useGetIDArticles();
 
   // Стили для элементов формы
   const searchInputStyle =
@@ -26,13 +27,13 @@ const SearchForm = observer(() => {
 
   // Массив значений изменения состояния чекбоксов
   const checkboxes = [
-    { id: "fullness", label: "Признак максимальной полноты" },
-    { id: "business", label: "Упоминания в бизнес-контексте" },
-    { id: "mainRole", label: "Главная роль в публикации" },
-    { id: "onlyRisk", label: "Публикации только с риск-факторами" },
-    { id: "techNews", label: "Включать технические новости рынков" },
-    { id: "includeAnonCalendar", label: "Включать анонсы и календари" },
-    { id: "includeNews", label: "Включать сводки новостей" },
+    { id: "isFullness", label: "Признак максимальной полноты" },
+    { id: "isBusiness", label: "Упоминания в бизнес-контексте" },
+    { id: "isMainRole", label: "Главная роль в публикации" },
+    { id: "isRisksOnly", label: "Публикации только с риск-факторами" },
+    { id: "isTechNews", label: "Включать технические новости рынков" },
+    { id: "isAnnouncement", label: "Включать анонсы и календари" },
+    { id: "isNews", label: "Включать сводки новостей" },
   ];
 
   const {
@@ -45,12 +46,12 @@ const SearchForm = observer(() => {
   });
 
   const onSubmit = async (data) => {
-		searchStore.setState("isError", false);
-		searchStore.setState("inn", data.inn);
-		searchStore.setState("limit", data.limit);
-		searchStore.setState("document", []);
-		searchStore.setState("IDs", {});
-		
+    searchStore.setState("isError", false);
+    searchStore.setState("inn", data.inn);
+    searchStore.setState("limit", data.limit);
+    searchStore.setState("document", []);
+    searchStore.setState("IDs", {});
+
     try {
       await fetchHistograms();
       await fetchIDArticle();
@@ -62,10 +63,6 @@ const SearchForm = observer(() => {
 
   useEffect(() => {
     !authStore.token && navigate("/");
-  });
-
-  useEffect(() => {
-    searchStore.resetChecks();
   });
 
   return (
@@ -126,10 +123,10 @@ const SearchForm = observer(() => {
         <div className="relative mb-7.5">
           <label className={labelStyle}>Количество документов *</label>
           <input
-            className={`-full ${searchInputStyle}`}
+            className={`w-full ${searchInputStyle}`}
             type="number"
             placeholder="От 1 до 1000"
-            defaultValue={5}
+            defaultValue={4}
             {...register("limit", {
               required: true,
               min: { value: 0 },
@@ -203,8 +200,9 @@ const SearchForm = observer(() => {
                 id={id}
                 type="checkbox"
                 className="cursor-pointer opacity-[40%]"
+                // checked={searchStore.searchFormChecks[id]}
                 onChange={() => {
-                  searchStore.toggleCheck(label);
+                  searchStore.toggleCheck(id);
                 }}
               />
               <label htmlFor={id} className="ml-2 text-gray-700">
@@ -221,7 +219,7 @@ const SearchForm = observer(() => {
             type="submit"
             className="w-full rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700 enabled:cursor-pointer disabled:opacity-50"
           >
-            Поиск
+             {searchStore.state.isLoading ? <Loader /> : "Поиск"}
           </button>
           <p className="ml-4 self-end text-sm text-gray-500">
             * Обязательные поля

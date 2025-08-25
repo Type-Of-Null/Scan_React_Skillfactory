@@ -16,7 +16,6 @@ export const useGetIDArticles = () => {
       if (response.data && response.data.items) {
         const docID = response.data.items.map(item => item.encodedId);
         searchStore.setState("IDs", docID);
-        console.log("IDs saved:", docID);
       }
       
       return response;

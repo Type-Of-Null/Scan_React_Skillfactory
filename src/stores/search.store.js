@@ -145,34 +145,6 @@ class SearchStore {
     });
   };
 
-  getIDs = () => {
-    axios
-      .post(API + `/api/v1/objectsearch`, this.searchParamsIdDocuments)
-      .then((response) => {
-        let docID = [];
-        response.data.items.map((id) => {
-          return docID.push(id.encodedId);
-        });
-        this.setState("IDs", docID);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  getFirstDocuments = () => {
-    axios
-      .post(API + `/api/v1/documents`, {
-        ids: this.state.IDs,
-      })
-      .then((response) => {
-        this.setState("document", response.data);
-        console.log(this.state.document)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   getNextDocuments = (next) => {
     this.setState("isDocumentLoading", true);
