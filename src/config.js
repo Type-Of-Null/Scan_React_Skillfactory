@@ -1,3 +1,5 @@
+export const API = "https://gateway.scan-interfax.ru";
+
 export const DEFAULT_VALUES = {
 	login: "sf_student1",
 	password: "4i2385j",
@@ -6,7 +8,7 @@ export const DEFAULT_VALUES = {
 
 };
 export const tarrifs = {
-	"begginer": true,
+	"beginner": true,
 	"pro": false,
-	"bussiness": false
+	"business": false
 } 

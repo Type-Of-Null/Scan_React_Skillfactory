@@ -3,6 +3,7 @@ import ProSvg from "../../assets/img/svg/Pro.svg";
 import BusinessSvg from "../../assets/img/svg/Business.svg";
 import flagTarrifs from "../../assets/img/flagTarrifs.png";
 import { Link } from "react-router-dom";
+import { tarrifs } from "../../config";
 
 export default function OurTarrifs() {
   const h3Style =
@@ -60,7 +61,7 @@ export default function OurTarrifs() {
   return (
     <section
       id="ourTarrifs"
-      className="mt-[107.48px] mx-[2%] flex min-h-screen  flex-col max-sm:ml-[14px] max-sm:w-[315px]"
+      className="mx-[2%] mt-[107.48px] flex min-h-screen flex-col max-sm:ml-[14px] max-sm:w-[315px]"
     >
       <div
         id="text_tarrifs"
@@ -68,7 +69,10 @@ export default function OurTarrifs() {
       >
         наши тарифы
       </div>
-      <div id="container_tarrifs" className="flex gap-[5%] max-lg:flex-col items-center">
+      <div
+        id="container_tarrifs"
+        className="flex items-center gap-[5%] max-lg:flex-col"
+      >
         {text_tarrifs.map((item) => (
           <div
             key={item.id}
@@ -96,6 +100,20 @@ export default function OurTarrifs() {
                 <h3 className="default_text mt-[33px] ml-[19px] h-[33px] w-[97px] pt-0.5 font-['Inter'] text-[25px] font-medium line-through opacity-50">
                   {item.price?.[0]}
                 </h3>
+
+                {/* "Текущий тариф" простая логика проверки подписки */}
+                {(() => {
+                  const configKey = item.name.toLowerCase();
+                  if (tarrifs[configKey]) {
+                    return (
+                      <div className="mt-3 h-6 w-[134px] rounded-[10px] bg-[#3BA5E0] text-center font-['Inter'] text-[14px] text-white opacity-100">
+                        Текущий тариф
+                      </div>
+                    );
+                  }
+                  return null;
+                })()}
+
                 <h4 className="default_text mt-[10px] ml-7.5 h-[22px] w-full font-['Inter'] text-[18px] font-normal">
                   {item.price?.[2]}
                 </h4>
@@ -128,7 +146,7 @@ export default function OurTarrifs() {
               {/* Кнопка "Подробнее"*/}
               <Link to="*">
                 <div className="flex flex-col items-center">
-                  <button className="default_text mt-10 h-[59px] w-56 rounded-[5px] bg-[#5970FF] text-[20px] text-white cursor-pointer">
+                  <button className="default_text mt-10 h-[59px] w-56 cursor-pointer rounded-[5px] bg-[#5970FF] text-[20px] text-white">
                     Подробнее
                   </button>
                 </div>

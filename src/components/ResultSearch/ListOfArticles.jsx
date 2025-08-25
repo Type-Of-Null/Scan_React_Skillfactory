@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useGetArticle } from "../requestsHooks/useGetArticle";
 import Article from "./Article";
 import searchStore from "../../stores/search.store";
-import Loader from "../loader";
+import Loader from "../Loader";
 
 const ListOfArticles = observer(() => {
   const [displayedCount, setDisplayedCount] = useState(10);
