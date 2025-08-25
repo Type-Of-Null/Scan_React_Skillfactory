@@ -1,15 +1,9 @@
-import axios from "axios";
 import { makeAutoObservable } from "mobx";
-import {API} from "../config"
 
 class AuthStore {
 	constructor() {
 		makeAutoObservable(this)
 		this.checkToken();
-		// axios.interceptors.request.use(config => {
-		// 	config.headers["Authorization"] = `Bearer ${this.token}`;
-		// 	return config;
-		// })
 	}
 
 	token = "";
@@ -27,38 +21,6 @@ class AuthStore {
 	setIsLoggedIn = bool => this.isLoggedIn = bool;
 	setToken = token => this.token = token;
 
-
-	// Метод получения токена
-	getToken = () => {
-		this.setLoading(true);
-		axios
-			.post(API + `/api/v1/account/login`, {
-				login: `${this.login}`,
-				password: `${this.password}`,
-				headers: {
-					'Content-Type': 'application/json',
-					'Accept': 'application/json',
-				},
-			})
-			.then((response) => {
-				if (response.status === 200) {
-					this.setToken(response.data.accessToken);
-					localStorage.setItem("token", response.data.accessToken);
-					localStorage.setItem("expire", response.data.expire);
-					localStorage.setItem("login", this.login);
-					this.setIsLoggedIn(true);
-					this.setAuthError(false)
-				}
-			})
-			.catch((err) => {
-				console.log(err);
-				this.setAuthError(true);
-				this.clearAuthData();
-			})
-			.finally(() => {
-				this.setLoading(false);
-			});
-	};
 
 	// Метод проверки токена
 	checkToken = () => {

@@ -8,11 +8,13 @@ import { useForm } from "react-hook-form";
 import { useAuthStore } from "../../stores/index";
 import { useEffect } from "react";
 import { DEFAULT_VALUES } from "../../config";
-import Loader from "../loader";
+import Loader from "../Loader";
+import { useGetToken } from "../requestsHooks/useGetToken";
 
 const FormAuth = observer(() => {
   const navigate = useNavigate();
   const authStore = useAuthStore();
+	const fetchToken = useGetToken();
 
   const {
     register,
@@ -27,7 +29,7 @@ const FormAuth = observer(() => {
   const onSubmit = (data) => {
     authStore.setLogin(data.login);
     authStore.setPassword(data.password);
-    authStore.getToken();
+    fetchToken()
   };
 
   useEffect(() => {

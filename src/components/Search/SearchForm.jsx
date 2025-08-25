@@ -1,5 +1,6 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Loader from "../Loader";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { observer } from "mobx-react-lite";
@@ -9,7 +10,6 @@ import { useSearchStore } from "../../stores/index";
 import { DEFAULT_VALUES } from "../../config";
 import { useGetHistograms } from "../requestsHooks/useGetHistograms";
 import { useGetIDArticles } from "../requestsHooks/useGetIDArticles";
-import Loader from "../Loader";
 
 const SearchForm = observer(() => {
   const navigate = useNavigate();
