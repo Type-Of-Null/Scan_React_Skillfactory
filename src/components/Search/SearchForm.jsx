@@ -126,10 +126,10 @@ const SearchForm = observer(() => {
             className={`w-full ${searchInputStyle}`}
             type="number"
             placeholder="От 1 до 1000"
-            defaultValue={4}
+            defaultValue={1}
             {...register("limit", {
               required: true,
-              min: { value: 0 },
+              min: { value: 1 },
               max: 1000,
             })}
             min="0"
