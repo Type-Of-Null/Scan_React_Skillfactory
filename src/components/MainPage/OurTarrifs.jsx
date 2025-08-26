@@ -85,7 +85,7 @@ export default function OurTarrifs() {
               className={`relative flex h-[132px] w-[415px] flex-col rounded-t-[10px] max-sm:w-full ${item.headerStyle}`}
             >
               <h3 className={h3Style}>{item.name}</h3>
-              <p className="default_text mt-[10px] ml-[30px] h-[22px] w-[313px] font-['Inter'] text-[18px] max-sm:mt-[22px]">
+              <p className="default_text mt-[10px] text-center h-[22px] w-[313px] font-['Inter'] text-[18px] max-sm:mt-[22px]">
                 {item.description}
               </p>
               <img src={item.image} alt="img" className={item.imageStyle} />
@@ -93,7 +93,7 @@ export default function OurTarrifs() {
 
             {/* Цена */}
             <section id="body" className="max-h-[408px]">
-              <div id="price_box" className="flex flex-wrap">
+              <div id="price_box" className="flex flex-wrap relative">
                 <h3 className="default_text mt-[33px] ml-[30px] h-[36px] w-[113px] font-['Inter'] text-[30px] font-medium">
                   {item.price?.[1]}
                 </h3>
@@ -106,7 +106,7 @@ export default function OurTarrifs() {
                   const configKey = item.name.toLowerCase();
                   if (tarrifs[configKey]) {
                     return (
-                      <div className="mt-3 h-6 w-[134px] rounded-[10px] bg-[#3BA5E0] text-center font-['Inter'] text-[14px] text-white opacity-100">
+                      <div className="absolute mt-1.5 h-6 w-[134px] rounded-[10px] bg-[#3BA5E0] text-center font-['Inter'] text-[14px] text-white right-0 mr-2">
                         Текущий тариф
                       </div>
                     );
@@ -123,7 +123,7 @@ export default function OurTarrifs() {
                 className="mt-[59px] ml-[30px] h-[110px] w-[341px] max-md:w-full max-sm:ml-[20px]"
               >
                 {/* Описание тарифа */}
-                <div className="default_text h-[24px] w-[360px] font-['Inter'] text-[20px] font-medium max-md:w-full">
+                <div className="default_text h-[24px] w-[360px] font-['Inter'] text-[20px] font-medium max-md:w-4/5">
                   В тариф входит:
                   <div className="mt-[10px] flex flex-col">
                     {item.priceDescription?.map((description, index) => (

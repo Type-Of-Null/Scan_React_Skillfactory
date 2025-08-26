@@ -7,7 +7,7 @@ export default function Auth() {
       {/* Блок с текстом */}
       <div
         id="text"
-        className="mt-[5%] ml-[7.5%] font-['Ferry'] text-[clamp(1rem,2.5vw,3rem)] leading-none font-black tracking-[2%] max-sm:order-1"
+        className="mt-[5%] font-['Ferry'] text-[clamp(1rem,2.5vw,3rem)] leading-none font-black tracking-[2%] max-sm:order-1"
       >
         Для оформления подписки на тариф, необходимо авторизоваться.
       </div>

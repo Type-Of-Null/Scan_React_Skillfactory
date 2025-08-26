@@ -2,7 +2,7 @@ import TotalSlider from "./TotalSlider";
 import womanTarget from "../../assets/img/svg/WomanTarget.svg";
 import { useSearchStore } from "../../stores";
 import { Link } from "react-router-dom";
-import Loader from "../loader";
+import Loader from "../Loader";
 import ListOfArticles from "./ListOfArticles";
 export default function Result() {
   const searchStore = useSearchStore();

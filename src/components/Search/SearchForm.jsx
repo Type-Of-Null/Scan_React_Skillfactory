@@ -200,7 +200,7 @@ const SearchForm = observer(() => {
                 id={id}
                 type="checkbox"
                 className="cursor-pointer opacity-[40%]"
-                // checked={searchStore.searchFormChecks[id]}
+                checked={searchStore.searchFormChecks[id]}
                 onChange={() => {
                   searchStore.toggleCheck(id);
                 }}
