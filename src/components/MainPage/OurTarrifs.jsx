@@ -1,9 +1,9 @@
-import BegginerSvg from "../../assets/img/svg/Begginer.svg";
-import ProSvg from "../../assets/img/svg/Pro.svg";
-import BusinessSvg from "../../assets/img/svg/Business.svg";
-import flagTarrifs from "../../assets/img/flagTarrifs.png";
-import { Link } from "react-router-dom";
-import { tarrifs } from "../../config";
+import BegginerSvg from '../../assets/img/svg/Begginer.svg';
+import ProSvg from '../../assets/img/svg/Pro.svg';
+import BusinessSvg from '../../assets/img/svg/Business.svg';
+import flagTarrifs from '../../assets/img/flagTarrifs.png';
+import { Link } from 'react-router-dom';
+import { tarrifs } from '../../config';
 
 export default function OurTarrifs() {
   const h3Style =
@@ -12,48 +12,48 @@ export default function OurTarrifs() {
   const text_tarrifs = [
     {
       id: 1,
-      name: "Beginner",
-      description: "Для небольшого исследования",
+      name: 'Beginner',
+      description: 'Для небольшого исследования',
       image: BegginerSvg,
       imageStyle:
-        "absolute w-[92.24px] h-[83.15px] mt-[11px] ml-[307px] max-sm:w-[59px] max-sm:h-[53px] max-sm:ml-[241px]",
-      headerStyle: "bg-[#FFB64F]",
-      price: ["2500 ₽", "1800 ₽", "или 150 ₽/мес. при рассрочке на 24 мес."],
+        'absolute w-[92.24px] h-[83.15px] mt-[11px] ml-[307px] max-sm:w-[59px] max-sm:h-[53px] max-sm:ml-[241px]',
+      headerStyle: 'bg-[#FFB64F]',
+      price: ['2500 ₽', '1800 ₽', 'или 150 ₽/мес. при рассрочке на 24 мес.'],
       priceDescription: [
-        "Безлимитная история запросов",
-        "Безопасная сделка",
-        "Поддержка 24/7",
+        'Безлимитная история запросов',
+        'Безопасная сделка',
+        'Поддержка 24/7',
       ],
     },
     {
       id: 2,
-      name: "Pro",
-      description: "Для HR и фрилансеров",
+      name: 'Pro',
+      description: 'Для HR и фрилансеров',
       image: ProSvg,
       imageStyle:
-        "absolute w-[92.24px] h-[83.15px] max-sm:w-[48px] max-sm:h-[75px] mt-[11px] ml-[307px] max-sm:ml-[228px]",
-      headerStyle: "bg-[#7CE3E1]",
-      h3Style: "text-[#000000]",
-      price: ["3600 ₽", "2800 ₽", "или 300 ₽/мес. при рассрочке на 24 мес."],
+        'absolute w-[92.24px] h-[83.15px] max-sm:w-[48px] max-sm:h-[75px] mt-[11px] ml-[307px] max-sm:ml-[228px]',
+      headerStyle: 'bg-[#7CE3E1]',
+      h3Style: 'text-[#000000]',
+      price: ['3600 ₽', '2800 ₽', 'или 300 ₽/мес. при рассрочке на 24 мес.'],
       priceDescription: [
-        "Все пункты тарифа Beginner",
-        "Экспорт истории",
-        "Рекомендации по приоритетам",
+        'Все пункты тарифа Beginner',
+        'Экспорт истории',
+        'Рекомендации по приоритетам',
       ],
     },
     {
       id: 3,
-      name: "Business",
-      description: "Для корпоративных клиентов",
+      name: 'Business',
+      description: 'Для корпоративных клиентов',
       image: BusinessSvg,
       imageStyle:
-        "absolute w-[92.24px] h-[83.15px] max-sm:w-[73px] max-sm:h-[61px] mt-[11px] ml-[307px] max-sm:ml-[222px]",
-      headerStyle: "bg-[#000000] text-[#FFFFFF]",
-      price: ["4999 ₽", "3499 ₽"],
+        'absolute w-[92.24px] h-[83.15px] max-sm:w-[73px] max-sm:h-[61px] mt-[11px] ml-[307px] max-sm:ml-[222px]',
+      headerStyle: 'bg-[#000000] text-[#FFFFFF]',
+      price: ['4999 ₽', '3499 ₽'],
       priceDescription: [
-        "Все пункты тарифа Pro",
-        "Безлимитное количество запросов",
-        "Приоритетная поддержка",
+        'Все пункты тарифа Pro',
+        'Безлимитное количество запросов',
+        'Приоритетная поддержка',
       ],
     },
   ];
@@ -85,7 +85,7 @@ export default function OurTarrifs() {
               className={`relative flex h-[132px] w-[415px] flex-col rounded-t-[10px] max-sm:w-full ${item.headerStyle}`}
             >
               <h3 className={h3Style}>{item.name}</h3>
-              <p className="default_text mt-[10px] text-center h-[22px] w-[313px] font-['Inter'] text-[18px] max-sm:mt-[22px]">
+              <p className="default_text mt-[10px] h-[22px] w-[313px] text-center font-['Inter'] text-[18px] max-sm:mt-[22px]">
                 {item.description}
               </p>
               <img src={item.image} alt="img" className={item.imageStyle} />
@@ -93,7 +93,7 @@ export default function OurTarrifs() {
 
             {/* Цена */}
             <section id="body" className="max-h-[408px]">
-              <div id="price_box" className="flex flex-wrap relative">
+              <div id="price_box" className="relative flex flex-wrap">
                 <h3 className="default_text mt-[33px] ml-[30px] h-[36px] w-[113px] font-['Inter'] text-[30px] font-medium">
                   {item.price?.[1]}
                 </h3>
@@ -106,7 +106,7 @@ export default function OurTarrifs() {
                   const configKey = item.name.toLowerCase();
                   if (tarrifs[configKey]) {
                     return (
-                      <div className="absolute mt-1.5 h-6 w-[134px] rounded-[10px] bg-[#3BA5E0] text-center font-['Inter'] text-[14px] text-white right-0 mr-2">
+                      <div className="absolute right-0 mt-1.5 mr-2 h-6 w-[134px] rounded-[10px] bg-[#3BA5E0] text-center font-['Inter'] text-[14px] text-white">
                         Текущий тариф
                       </div>
                     );

@@ -10,7 +10,7 @@ export default function SliderElement({ text, image, className }) {
           className="mt-[8px] mb-[7px] ml-[1px] h-[64px] w-[64px]"
         />
       </div>
-      <div className="default_text mt-2 max-w-[278px] text-center font-['Inter'] text-[16px] font-normal sm:max-h-[44px] sm:max-w-[313px] sm:text-[18px] p-4">
+      <div className="default_text mt-2 max-w-[278px] p-4 text-center font-['Inter'] text-[16px] font-normal sm:max-h-[44px] sm:max-w-[313px] sm:text-[18px]">
         {text}
       </div>
     </section>

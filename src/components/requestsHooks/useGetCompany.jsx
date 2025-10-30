@@ -1,17 +1,16 @@
-import { useCompanyStore } from "../../stores";
-import { useAuthStore } from "../../stores"
-import api from "../../api/axios";
+import { useAuthStore, useCompanyStore } from '../../stores';
+import api from '../../api/axios';
 
 export const useGetCompany = () => {
   const companyStore = useCompanyStore();
-	const authStore = useAuthStore();
+  const authStore = useAuthStore();
 
-  const fetchCompanyInfo = async () => {
+  return async () => {
     companyStore.setCompaniesLoading(true);
 
     try {
       const response = await api.get(`/api/v1/account/info`, {
-				headers: {
+        headers: {
           Authorization: `Bearer ${authStore.token}`,
         },
       });
@@ -23,11 +22,9 @@ export const useGetCompany = () => {
         );
       }
     } catch (error) {
-      console.error("Ошибка получения данных:", error);
+      console.error('Ошибка получения данных:', error);
     } finally {
       companyStore.setCompaniesLoading(false);
     }
   };
-
-  return fetchCompanyInfo;
 };

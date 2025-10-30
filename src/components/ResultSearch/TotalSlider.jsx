@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Loader from "../Loader";
-import { useSearchStore } from "../../stores";
-import { observer } from "mobx-react-lite";
-import flag from "../../assets/img/flagSlider.png";
+import React, { useState, useEffect } from 'react';
+import Loader from '../Loader';
+import { useSearchStore } from '../../stores';
+import { observer } from 'mobx-react-lite';
+import flag from '../../assets/img/flagSlider.png';
 
 const TotalSlider = observer(() => {
   const searchStore = useSearchStore();
@@ -23,9 +23,9 @@ const TotalSlider = observer(() => {
     };
 
     updateVisibleItems();
-    window.addEventListener("resize", updateVisibleItems);
+    window.addEventListener('resize', updateVisibleItems);
 
-    return () => window.removeEventListener("resize", updateVisibleItems);
+    return () => window.removeEventListener('resize', updateVisibleItems);
   }, []);
 
   const handleLeftClick = () => {
@@ -55,7 +55,7 @@ const TotalSlider = observer(() => {
   };
 
   const getItemWidth = () => {
-    if (!sliderElement || sliderElement.length === 0) return "auto";
+    if (!sliderElement || sliderElement.length === 0) return 'auto';
 
     const actualVisible = Math.min(sliderElement.length, visibleItems);
     return `${100 / actualVisible}%`;
@@ -93,8 +93,8 @@ const TotalSlider = observer(() => {
               disabled={!canGoLeft}
               className={`mr-2 h-[39px] w-[39px] rotate-180 transition-opacity ${
                 canGoLeft
-                  ? "cursor-pointer opacity-100"
-                  : "cursor-not-allowed opacity-20"
+                  ? 'cursor-pointer opacity-100'
+                  : 'cursor-not-allowed opacity-20'
               }`}
             >
               <img src={flag} alt="Назад" />
@@ -116,7 +116,7 @@ const TotalSlider = observer(() => {
                     <div
                       key={index}
                       className="flex flex-shrink-0 flex-col items-center justify-center border-l border-[#029491] px-4 text-[18px] lg:px-6"
-                      style={{ width: getItemWidth(), minWidth: "120px" }}
+                      style={{ width: getItemWidth(), minWidth: '120px' }}
                     >
                       <p className="py-2 text-center lg:text-base">{date}</p>
                       <p className="py-2 text-center lg:text-base">{total}</p>
@@ -132,8 +132,8 @@ const TotalSlider = observer(() => {
               disabled={!canGoRight}
               className={`ml-2 h-[39px] w-[39px] transition-opacity ${
                 canGoRight
-                  ? "cursor-pointer opacity-100"
-                  : "cursor-not-allowed opacity-20"
+                  ? 'cursor-pointer opacity-100'
+                  : 'cursor-not-allowed opacity-20'
               }`}
             >
               <img src={flag} alt="Вперед" />

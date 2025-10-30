@@ -1,20 +1,20 @@
-import { NavLink, Link, useNavigate } from "react-router-dom";
-import lock from "../../assets/img/svg/Lock.svg";
-import google from "../../assets/img/svg/google.svg";
-import facebook from "../../assets/img/svg/facebook.svg";
-import yandex from "../../assets/img/svg/yandex.svg";
-import { observer } from "mobx-react-lite";
-import { useForm } from "react-hook-form";
-import { useAuthStore } from "../../stores/index";
-import { useEffect } from "react";
-import { DEFAULT_VALUES } from "../../config";
-import Loader from "../Loader";
-import { useGetToken } from "../requestsHooks/useGetToken";
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+import lock from '../../assets/img/svg/Lock.svg';
+import google from '../../assets/img/svg/google.svg';
+import facebook from '../../assets/img/svg/facebook.svg';
+import yandex from '../../assets/img/svg/yandex.svg';
+import { observer } from 'mobx-react-lite';
+import { useForm } from 'react-hook-form';
+import { useAuthStore } from '../../stores/index';
+import { useEffect } from 'react';
+import { DEFAULT_VALUES } from '../../config';
+import Loader from '../Loader';
+import { useGetToken } from '../requestsHooks/useGetToken';
 
 const FormAuth = observer(() => {
   const navigate = useNavigate();
   const authStore = useAuthStore();
-	const fetchToken = useGetToken();
+  const fetchToken = useGetToken();
 
   const {
     register,
@@ -22,18 +22,18 @@ const FormAuth = observer(() => {
     reset,
     formState: { errors, isValid },
   } = useForm({
-    mode: "onChange",
+    mode: 'onChange',
     defaultValues: DEFAULT_VALUES,
   });
-	
+
   const onSubmit = (data) => {
     authStore.setLogin(data.login);
     authStore.setPassword(data.password);
-    fetchToken()
+    fetchToken();
   };
 
   useEffect(() => {
-    authStore.token && navigate("/");
+    authStore.token && navigate('/');
   });
 
   useEffect(() => {
@@ -43,9 +43,9 @@ const FormAuth = observer(() => {
   }, [authStore.isLoggedIn, reset]);
 
   const inputStyle =
-    "my-[5px] h-[43px] rounded-[5px] focus:border-blue-500 focus:outline-none border border-gray-300  px-5 text-base text-black tracking-[0.01em] shadow-[0_0_20px_rgba(0,0,0,0.05)]";
+    'my-[5px] h-[43px] rounded-[5px] focus:border-blue-500 focus:outline-none border border-gray-300  px-5 text-base text-black tracking-[0.01em] shadow-[0_0_20px_rgba(0,0,0,0.05)]';
   const labelStyle =
-    "relative mb-[15px] flex w-full flex-col text-[16px] leading-[19px] tracking-[0.02em] text-[#949494]";
+    'relative mb-[15px] flex w-full flex-col text-[16px] leading-[19px] tracking-[0.02em] text-[#949494]';
 
   return (
     <form
@@ -68,8 +68,8 @@ const FormAuth = observer(() => {
           className={({ isActive }) =>
             `mx-1 mb-10 pb-1 font-['Inter'] text-[16px] max-sm:px-0 max-sm:text-sm ${
               isActive
-                ? "border-b-2 border-[#029491] text-[#029491]"
-                : "text-gray-500"
+                ? 'border-b-2 border-[#029491] text-[#029491]'
+                : 'text-gray-500'
             } max-sm:px-4`
           }
         >
@@ -81,8 +81,8 @@ const FormAuth = observer(() => {
           className={({ isActive }) =>
             `mx-2.5 mb-10 pb-1 font-['Inter'] text-[16px] transition-colors max-sm:text-sm ${
               isActive
-                ? "border-b-2 border-[#029491] text-[#029491]"
-                : "border-b-2 text-gray-500"
+                ? 'border-b-2 border-[#029491] text-[#029491]'
+                : 'border-b-2 text-gray-500'
             } max-sm:px-4`
           }
         >
@@ -95,11 +95,11 @@ const FormAuth = observer(() => {
       <label className={labelStyle}>
         Логин или номер телефона:
         <input
-          className={`${inputStyle} ${errors?.login ? "border-red-500" : ""}`}
+          className={`${inputStyle} ${errors?.login ? 'border-red-500' : ''}`}
           type="text"
           autoComplete="username"
-          {...register("login", {
-            required: "Введите корректные данные",
+          {...register('login', {
+            required: 'Введите корректные данные',
             pattern: {
               value: /^[\w-]+$/,
             },
@@ -108,7 +108,7 @@ const FormAuth = observer(() => {
         <div className="min-h-[30px]">
           {(errors.login || authStore.isAuthError) && (
             <p className="mt-1 text-center text-sm text-red-500">
-              {errors.login?.message || "Неправильный логин или пароль"}
+              {errors.login?.message || 'Неправильный логин или пароль'}
             </p>
           )}
         </div>
@@ -118,12 +118,12 @@ const FormAuth = observer(() => {
       <label className={labelStyle}>
         Пароль:
         <input
-          className={`${inputStyle} ${errors?.password ? "border-red-500" : ""}`}
+          className={`${inputStyle} ${errors?.password ? 'border-red-500' : ''}`}
           type="password"
           autoComplete="current-password"
-          {...register("password", {
-            required: "Неправильный пароль",
-            placeholder: "Пароль",
+          {...register('password', {
+            required: 'Неправильный пароль',
+            placeholder: 'Пароль',
           })}
         />
         <div className="min-h-[30px]">
@@ -141,11 +141,11 @@ const FormAuth = observer(() => {
         disabled={!isValid || authStore.isLoading} //Запрет повторного запроса
         className={`${
           !isValid
-            ? "bg-[#a0acfa]"
-            : "cursor-pointer bg-[#5970FF] hover:bg-[#4a66c8]"
+            ? 'bg-[#a0acfa]'
+            : 'cursor-pointer bg-[#5970FF] hover:bg-[#4a66c8]'
         } default-text flex h-15 w-full items-center justify-center rounded-[5px] border-[1px] border-[#C7C7C7] text-[22px] font-medium tracking-[0.01em] text-white transition-colors duration-300 ease-in-out`}
       >
-        {authStore.isLoading ? <Loader /> : "Войти"}
+        {authStore.isLoading ? <Loader /> : 'Войти'}
       </button>
 
       <Link

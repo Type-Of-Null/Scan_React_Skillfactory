@@ -1,8 +1,8 @@
-import Promo from "./Promo";
-import Slider from "./Slider";
-import ManCheck from "./ManCheck";
-import OurTarrifs from "./OurTarrifs";
-import { observer } from "mobx-react-lite";
+import Promo from './Promo';
+import Slider from './Slider';
+import ManCheck from './ManCheck';
+import OurTarrifs from './OurTarrifs';
+import { observer } from 'mobx-react-lite';
 
 const MainPage = observer(() => {
   return (
@@ -13,6 +13,6 @@ const MainPage = observer(() => {
       <OurTarrifs />
     </>
   );
-})
+});
 
 export default MainPage;

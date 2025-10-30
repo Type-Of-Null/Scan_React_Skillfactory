@@ -1,12 +1,12 @@
-import { createContext, useContext } from "react";
-import authStore from "./auth.store";
-import compStore from "./company.store";
-import searchStore from "./search.store";
+import { createContext, useContext } from 'react';
+import authStore from './auth.store';
+import compStore from './company.store';
+import searchStore from './search.store';
 
 const rootStore = {
-	userStore: authStore,
-	companyStore: compStore,
-	searchStore: searchStore
+  userStore: authStore,
+  companyStore: compStore,
+  searchStore: searchStore,
 };
 
 // Создаём контекст с привязкой к rootStore

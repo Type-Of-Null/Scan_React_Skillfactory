@@ -1,6 +1,6 @@
-import axios from "axios";
-import { makeAutoObservable } from "mobx";
-import { API } from "../config";
+import axios from 'axios';
+import { makeAutoObservable } from 'mobx';
+import { API } from '../config';
 
 class SearchStore {
   constructor() {
@@ -23,7 +23,7 @@ class SearchStore {
     isDocumentLoading: false,
     isError: false,
     inn: null,
-    tonality: "any",
+    tonality: 'any',
     limit: 0,
     startDate: new Date(2025, 0, 1),
     endDate: new Date(),
@@ -44,7 +44,7 @@ class SearchStore {
         targetSearchEntitiesContext: {
           targetSearchEntities: [
             {
-              type: "company",
+              type: 'company',
               sparkId: null,
               entityId: null,
               inn: this.state.inn,
@@ -83,12 +83,12 @@ class SearchStore {
         excludeAnnouncements: this.searchFormChecks.isAnnouncement,
         excludeDigests: this.searchFormChecks.isNews,
       },
-      similarMode: "duplicates",
+      similarMode: 'duplicates',
       limit: this.state.limit,
-      sortType: "issueDate",
-      sortDirectionType: "desc",
-      intervalType: "month",
-      histogramTypes: ["totalDocuments", "riskFactors"],
+      sortType: 'issueDate',
+      sortDirectionType: 'desc',
+      intervalType: 'month',
+      histogramTypes: ['totalDocuments', 'riskFactors'],
     };
   }
 
@@ -140,25 +140,24 @@ class SearchStore {
   };
 
   resetChecks = () => {
-    Object.keys(this.searchFormChecks).forEach(key => {
+    Object.keys(this.searchFormChecks).forEach((key) => {
       this.searchFormChecks[key] = false;
     });
   };
 
-
   getNextDocuments = (next) => {
-    this.setState("isDocumentLoading", true);
+    this.setState('isDocumentLoading', true);
     axios
       .post(API + `/api/v1/documents`, {
         ids: next,
       })
       .then((response) => {
         this.setState([...this.state.document, ...response.data]);
-        this.setState("isDocumentLoading", false);
+        this.setState('isDocumentLoading', false);
       })
       .catch((err) => {
         console.log(err);
-        this.setState("isDocumentLoading", false);
+        this.setState('isDocumentLoading', false);
       });
   };
 }

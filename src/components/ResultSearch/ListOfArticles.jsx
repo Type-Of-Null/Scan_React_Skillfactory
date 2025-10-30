@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { observer } from "mobx-react-lite";
-import { Link } from "react-router-dom";
-import { useGetArticle } from "../requestsHooks/useGetArticle";
-import Article from "./Article";
-import searchStore from "../../stores/search.store";
-import Loader from "../Loader";
+import React, { useEffect, useState, useCallback } from 'react';
+import { observer } from 'mobx-react-lite';
+import { Link } from 'react-router-dom';
+import { useGetArticle } from '../requestsHooks/useGetArticle';
+import Article from './Article';
+import searchStore from '../../stores/search.store';
+import Loader from '../Loader';
 
 const ListOfArticles = observer(() => {
   const [displayedCount, setDisplayedCount] = useState(10);
@@ -31,7 +31,7 @@ const ListOfArticles = observer(() => {
   const showMore = useCallback(async () => {
     if (!canShowMore) return;
 
-		// Следйющие 10 статей
+    // Следйющие 10 статей
     const nextBatch = IDs.slice(displayedCount, displayedCount + 10);
     setDisplayedCount((prev) => prev + nextBatch.length);
 
@@ -43,7 +43,7 @@ const ListOfArticles = observer(() => {
 
   // Отображаемые статьи (максимум 10 за раз)
   const displayedArticles = document.slice(0, displayedCount);
-	console.log(displayedArticles)
+  console.log(displayedArticles);
 
   // Если нет документов и загрузка завершена
   if (initialLoadDone && document.length === 0) {
@@ -69,8 +69,7 @@ const ListOfArticles = observer(() => {
 
   return (
     <div className="flex flex-col">
-      <h3 className=" font-['Ferry'] leading-none font-black tracking-[0.28px] text-black mb-[58px] max-sm:mb-[34px]
-			max-lg:mt-[57px] mt-[107px]">
+      <h3 className="mt-[107px] mb-[58px] font-['Ferry'] leading-none font-black tracking-[0.28px] text-black max-lg:mt-[57px] max-sm:mb-[34px]">
         Список документов
       </h3>
 
@@ -80,11 +79,11 @@ const ListOfArticles = observer(() => {
             key={el.ok.encodedId}
             issueDate={el.ok.issueDate
               .substring(0, 10)
-              .split("-")
-              .join(".")
-              .split(".")
+              .split('-')
+              .join('.')
+              .split('.')
               .reverse()
-              .join(".")}
+              .join('.')}
             source={el.ok.source.name}
             title={el.ok.title.text}
             isTechNews={el.ok.attributes.isTechNews}
@@ -98,9 +97,9 @@ const ListOfArticles = observer(() => {
       </div>
 
       {canShowMore && !isDocumentLoading && (
-        <div className="flex justify-center mb-4">
+        <div className="mb-4 flex justify-center">
           <button
-            className="bg-[#5970FF]  h-[60px] w-[300px] max-sm:w-[335px] cursor-pointer self-center rounded-[5px] border-none font-['Inter'] text-[22px] max-sm:text-[22px] tracking-[0.88px] text-white"
+            className="h-[60px] w-[300px] cursor-pointer self-center rounded-[5px] border-none bg-[#5970FF] font-['Inter'] text-[22px] tracking-[0.88px] text-white max-sm:w-[335px] max-sm:text-[22px]"
             onClick={showMore}
           >
             Показать больше

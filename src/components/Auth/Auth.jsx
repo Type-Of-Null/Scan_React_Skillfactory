@@ -1,5 +1,5 @@
-import keySvg from "../../assets/img/svg/AuthKey.svg";
-import FormAuth  from "./FormAuth";
+import keySvg from '../../assets/img/svg/AuthKey.svg';
+import FormAuth from './FormAuth';
 
 export default function Auth() {
   return (
@@ -14,7 +14,6 @@ export default function Auth() {
 
       {/* Контейнер с формой */}
       <div className="relative order-2 row-span-3 max-sm:order-2">
-
         {/* Форма аутентификации и регистрации */}
         <FormAuth />
       </div>

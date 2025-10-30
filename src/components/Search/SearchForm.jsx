@@ -1,15 +1,15 @@
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import Loader from "../Loader";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { observer } from "mobx-react-lite";
-import { useAuthStore } from "../../stores/index";
-import { useNavigate } from "react-router-dom";
-import { useSearchStore } from "../../stores/index";
-import { DEFAULT_VALUES } from "../../config";
-import { useGetHistograms } from "../requestsHooks/useGetHistograms";
-import { useGetIDArticles } from "../requestsHooks/useGetIDArticles";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import Loader from '../Loader';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { observer } from 'mobx-react-lite';
+import { useAuthStore } from '../../stores/index';
+import { useNavigate } from 'react-router-dom';
+import { useSearchStore } from '../../stores/index';
+import { DEFAULT_VALUES } from '../../config';
+import { useGetHistograms } from '../requestsHooks/useGetHistograms';
+import { useGetIDArticles } from '../requestsHooks/useGetIDArticles';
 
 const SearchForm = observer(() => {
   const navigate = useNavigate();
@@ -20,20 +20,20 @@ const SearchForm = observer(() => {
 
   // Стили для элементов формы
   const searchInputStyle =
-    "text-sm rounded-[5px] focus:border-blue-500 focus:outline-none border border-gray-300 bg-white shadow-[0_0_20px_rgba(0,0,0,0.05)] p-[13px] tracking-[0.03em] w-[60%]";
-  const labelStyle = "mb-5 flex w-[91%] flex-col text-lg";
+    'text-sm rounded-[5px] focus:border-blue-500 focus:outline-none border border-gray-300 bg-white shadow-[0_0_20px_rgba(0,0,0,0.05)] p-[13px] tracking-[0.03em] w-[60%]';
+  const labelStyle = 'mb-5 flex w-[91%] flex-col text-lg';
   const searchDateStyle =
-    " w-full rounded-[5px] focus:border-blue-500 focus:outline-none border border-gray-300 p-[13px]";
+    ' w-full rounded-[5px] focus:border-blue-500 focus:outline-none border border-gray-300 p-[13px]';
 
   // Массив значений изменения состояния чекбоксов
   const checkboxes = [
-    { id: "isFullness", label: "Признак максимальной полноты" },
-    { id: "isBusiness", label: "Упоминания в бизнес-контексте" },
-    { id: "isMainRole", label: "Главная роль в публикации" },
-    { id: "isRisksOnly", label: "Публикации только с риск-факторами" },
-    { id: "isTechNews", label: "Включать технические новости рынков" },
-    { id: "isAnnouncement", label: "Включать анонсы и календари" },
-    { id: "isNews", label: "Включать сводки новостей" },
+    { id: 'isFullness', label: 'Признак максимальной полноты' },
+    { id: 'isBusiness', label: 'Упоминания в бизнес-контексте' },
+    { id: 'isMainRole', label: 'Главная роль в публикации' },
+    { id: 'isRisksOnly', label: 'Публикации только с риск-факторами' },
+    { id: 'isTechNews', label: 'Включать технические новости рынков' },
+    { id: 'isAnnouncement', label: 'Включать анонсы и календари' },
+    { id: 'isNews', label: 'Включать сводки новостей' },
   ];
 
   const {
@@ -41,28 +41,28 @@ const SearchForm = observer(() => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({
-    mode: "onChange",
+    mode: 'onChange',
     defaultValues: DEFAULT_VALUES,
   });
 
   const onSubmit = async (data) => {
-    searchStore.setState("isError", false);
-    searchStore.setState("inn", data.inn);
-    searchStore.setState("limit", data.limit);
-    searchStore.setState("document", []);
-    searchStore.setState("IDs", {});
+    searchStore.setState('isError', false);
+    searchStore.setState('inn', data.inn);
+    searchStore.setState('limit', data.limit);
+    searchStore.setState('document', []);
+    searchStore.setState('IDs', {});
 
     try {
       await fetchHistograms();
       await fetchIDArticle();
-      navigate("/result");
+      navigate('/result');
     } catch (error) {
-      console.error("Ошибка:", error);
+      console.error('Ошибка:', error);
     }
   };
 
   useEffect(() => {
-    !authStore.token && navigate("/");
+    !authStore.token && navigate('/');
   });
 
   return (
@@ -83,12 +83,12 @@ const SearchForm = observer(() => {
             id="innNumber"
             className={`w-full ${searchInputStyle} ${
               errors?.inn
-                ? "border-red-500 focus:border-red-500"
-                : "focus:border-black"
+                ? 'border-red-500 focus:border-red-500'
+                : 'focus:border-black'
             }`}
             type="text"
             placeholder="10 цифр"
-            {...register("inn", {
+            {...register('inn', {
               required: true,
               minLength: 10,
               maxLength: 10,
@@ -110,7 +110,7 @@ const SearchForm = observer(() => {
           <select
             className={`mb-7.5 w-full ${searchInputStyle}`}
             onChange={(e) => {
-              searchStore.setState("tonality", e.target.value);
+              searchStore.setState('tonality', e.target.value);
             }}
           >
             <option>Любая</option>
@@ -127,7 +127,7 @@ const SearchForm = observer(() => {
             type="number"
             placeholder="От 1 до 1000"
             defaultValue={1}
-            {...register("limit", {
+            {...register('limit', {
               required: true,
               min: { value: 1 },
               max: 1000,
@@ -156,7 +156,7 @@ const SearchForm = observer(() => {
                 selected={searchStore.state.startDate}
                 maxDate={searchStore.state.endDate}
                 onChange={(startDate) => {
-                  searchStore.setState("startDate", startDate);
+                  searchStore.setState('startDate', startDate);
                 }}
                 fixedHeight
                 showYearDropdown
@@ -180,7 +180,7 @@ const SearchForm = observer(() => {
                 minDate={searchStore.state.startDate}
                 maxDate={new Date()}
                 onChange={(endDate) => {
-                  searchStore.setState("endDate", endDate);
+                  searchStore.setState('endDate', endDate);
                 }}
               />
               <label htmlFor="dateEnd" className="mt-2.5 text-sm text-gray-500">
@@ -219,7 +219,7 @@ const SearchForm = observer(() => {
             type="submit"
             className="w-full rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700 enabled:cursor-pointer disabled:opacity-50"
           >
-             {searchStore.state.isLoading ? <Loader /> : "Поиск"}
+            {searchStore.state.isLoading ? <Loader /> : 'Поиск'}
           </button>
           <p className="ml-4 self-end text-sm text-gray-500">
             * Обязательные поля

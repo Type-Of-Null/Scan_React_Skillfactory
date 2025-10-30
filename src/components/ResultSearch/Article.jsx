@@ -1,27 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import noImage from "../../assets/img/svg/no-image.svg";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import noImage from '../../assets/img/svg/no-image.svg';
 
 export default function Article(props) {
-  let xmlImg = "";
+  let xmlImg;
   if (props.content.match(/https?:\/\/\S+"/g) === null) {
     xmlImg = noImage;
   } else {
     xmlImg = props.content
       .match(/https?:\/\/\S+"/g)
       .toString()
-      .replace('"', "");
+      .replace('"', '');
   }
 
   const cleanContent = (content) => {
-    if (!content) return "";
+    if (!content) return '';
 
     return (
       content
-        .replace(/<[^>]*>/g, "")
-        .replace(/&[a-z]+;/gi, "")
-        .replace(/(https?:\/\/[^\s]+)/g, "")
-        .substring(0, 400) + (content.length > 400 ? "..." : "")
+        .replace(/<[^>]*>/g, '')
+        .replace(/&[a-z]+;/gi, '')
+        .replace(/(https?:\/\/[^\s]+)/g, '')
+        .substring(0, 400) + (content.length > 400 ? '...' : '')
     ); // Ограничиваем длину
   };
 
@@ -34,7 +34,7 @@ export default function Article(props) {
         <Link
           className="mr-[15px] text-base font-normal tracking-[0.32px] text-gray-500"
           to={props.link}
-          target={"_blank"}
+          target={'_blank'}
         >
           {props.source}
         </Link>
@@ -60,7 +60,7 @@ export default function Article(props) {
         )}
       </div>
       <img
-        className={`my-5 h-[158px] w-full rounded-[10px] ${xmlImg == noImage ? "object-contain" : "object-cover"}`}
+        className={`my-5 h-[158px] w-full rounded-[10px] ${xmlImg === noImage ? 'object-contain' : 'object-cover'}`}
         src={xmlImg}
         alt=""
       />
@@ -71,7 +71,7 @@ export default function Article(props) {
         <Link
           className="rounded-[5px] bg-[#7CE3E1] px-8 py-4 text-center text-base font-normal tracking-[0.32px] text-black no-underline transition-all duration-300 ease-in-out"
           to={props.link}
-          target={"_blank"}
+          target={'_blank'}
         >
           Читать в источнике
         </Link>

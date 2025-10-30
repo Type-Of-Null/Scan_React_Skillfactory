@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
-import { useCompanyStore } from "../../stores";
-import { useGetCompany } from "../requestsHooks/useGetCompany";
-import Loader from "../Loader";
+import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
+import { useCompanyStore } from '../../stores';
+import { useGetCompany } from '../requestsHooks/useGetCompany';
+import Loader from '../Loader';
 
 const Companies = observer(() => {
   const [initialLoadDone, setInitialLoadDone] = useState(false);

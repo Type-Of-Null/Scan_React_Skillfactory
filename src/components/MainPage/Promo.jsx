@@ -1,8 +1,7 @@
-import { observer } from "mobx-react-lite";
-import PromoImg from "../../assets/img/promo.png";
-import { useAuthStore } from "../../stores";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { observer } from 'mobx-react-lite';
+import PromoImg from '../../assets/img/promo.png';
+import { useAuthStore } from '../../stores';
+import { useNavigate } from 'react-router-dom';
 
 const Promo = observer(() => {
   const authStore = useAuthStore();
@@ -10,9 +9,9 @@ const Promo = observer(() => {
 
   const handleClick = () => {
     if (authStore.isLoggedIn) {
-      navigate("/search");
+      navigate('/search');
     } else {
-      navigate("/auth");
+      navigate('/auth');
     }
   };
 
@@ -35,7 +34,7 @@ const Promo = observer(() => {
             className="w-[300px] rounded-lg bg-[#5970FF] px-8 py-4 font-['Inter'] text-lg font-medium text-white transition-colors hover:cursor-pointer hover:bg-[#4758d4] sm:w-[335px]"
             onClick={handleClick}
           >
-            {authStore.isLoggedIn ? "Запросить данные" : "Войти"}
+            {authStore.isLoggedIn ? 'Запросить данные' : 'Войти'}
           </button>
         </div>
 

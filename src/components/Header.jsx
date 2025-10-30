@@ -1,14 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
-import Scan_logo from "../assets/img/scan_logo.png";
-import Scan_logo_burger from "../assets/img/scan_logo_burger.png";
-import BurgerButton from "../assets/img/svg/BurgerButton.svg";
-import CloseIcon from "../assets/img/CloseIcon.png";
-import NotSigned from "./UserBlock/NotSigned";
-import Signed from "./UserBlock/Signed";
-import { useAuthStore } from "../stores";
-import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
-import Companies from "./UserBlock/Companies";
+import { Link, useNavigate } from 'react-router-dom';
+import Scan_logo from '../assets/img/scan_logo.png';
+import Scan_logo_burger from '../assets/img/scan_logo_burger.png';
+import BurgerButton from '../assets/img/svg/BurgerButton.svg';
+import CloseIcon from '../assets/img/CloseIcon.png';
+import NotSigned from './UserBlock/NotSigned';
+import Signed from './UserBlock/Signed';
+import { useAuthStore } from '../stores';
+import { observer } from 'mobx-react-lite';
+import { useEffect, useState } from 'react';
+import Companies from './UserBlock/Companies';
 
 const link_style =
   "text-black hover:text-blue-500 relative inline-block pb-1 after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-blue-500 after:transition-all after:duration-300 hover:after:w-full";
@@ -39,7 +39,7 @@ const Header = observer(() => {
 
   const handleClick = () => {
     {
-      isLoggedIn ? authStore.clearAuthData() : navigate("/auth");
+      isLoggedIn ? authStore.clearAuthData() : navigate('/auth');
     }
     setIsMenuOpen(false);
   };
@@ -125,7 +125,7 @@ const Header = observer(() => {
               className="h-[52px] w-[295px] rounded-lg bg-[#7CE3E1] px-8 py-3 font-['Inter'] text-[16px] text-white transition-colors hover:text-black"
               onClick={handleClick}
             >
-              {isLoggedIn ? "Выйти" : "Войти"}
+              {isLoggedIn ? 'Выйти' : 'Войти'}
             </button>
           </div>
         </div>
