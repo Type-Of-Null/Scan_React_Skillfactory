@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Loader from "../loader";
+import Loader from "../Loader";
 import { useSearchStore } from "../../stores";
 import { observer } from "mobx-react-lite";
-import Flag from "../../assets/img/flagSlider.png";
+import flag from "../../assets/img/flagSlider.png";
 
 const TotalSlider = observer(() => {
   const searchStore = useSearchStore();
@@ -97,7 +97,7 @@ const TotalSlider = observer(() => {
                   : "cursor-not-allowed opacity-20"
               }`}
             >
-              <img src={Flag} alt="Назад" />
+              <img src={flag} alt="Назад" />
             </button>
 
             <div className="flex max-w-6xl flex-row overflow-hidden rounded-[10px] border border-[#029491]">
@@ -136,7 +136,7 @@ const TotalSlider = observer(() => {
                   : "cursor-not-allowed opacity-20"
               }`}
             >
-              <img src={Flag} alt="Вперед" />
+              <img src={flag} alt="Вперед" />
             </button>
           </div>
         </>
